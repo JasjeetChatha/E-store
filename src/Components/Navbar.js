@@ -12,13 +12,16 @@ function Navbar() {
               <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
+              <a class="nav-link" href="#">Laptops</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
+              <a class="nav-link" href="#">Pc's</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
+              <a class="nav-link" href="#">Mobiles</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Consoles</a>
             </li>
           </ul>
         </div>
