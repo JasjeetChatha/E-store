@@ -12,9 +12,9 @@ function HomeCard({name,price,brand,rating,desc,imageUrl}) {
     <p class="card-text" className="desc">{desc}</p>
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item" className="brand">{brand}</li>
-    <li class="list-group-item" className="rating">{rating}</li>
-    <li class="list-group-item" className="price">{price}</li>
+    <li class="list-group-item" className="brand"><b>Brand: </b>{brand}</li>
+    <li class="list-group-item" className="rating"><b>Rating: </b>{rating}</li>
+    <li class="list-group-item" className="price"><b>Price: </b>{price}</li>
   </ul>
   <div class="card-body">
     <a href="#" class="card-link"><button type="button" class="btn btn-secondary">Add To Cart</button></a>
