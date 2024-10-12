@@ -1,11 +1,11 @@
 import { Fragment } from "react";
 import React from "react";
 
-function HomeCard({name,price,brand,rating,desc,imageUrl}) {
+function HomeCard({id,name,price,brand,rating,desc,imageUrl}) {
   return (
 <Fragment>
 
-    <div class="card text-white bg-dark mb-3" style={{width:' 18rem'}}>
+    <div class="card text-white bg-dark mb-3" style={{width:' 18rem'}} onClick={()=>window.location.href = `/detail/${id}`}>
   <img class="card-img-top" className="imgurl" src={imageUrl} alt="Card image cap"/>
   <div class="card-body">
     <h5 class="card-title" className="title">{name}</h5>
