@@ -138,7 +138,7 @@ function Home() {
         <h2>Pc's</h2>
         {pcs.map((pc) => (
       <HomeCard 
-      key={pc.id}
+      id={pc.id}
       name={pc.name}
       price={pc.price}
       brand={pc.brand}
@@ -154,7 +154,7 @@ function Home() {
         <h2>Laptops</h2>
         {laptops.map((lap) => (
       <HomeCard 
-      key={lap.id}
+      id={lap.id}
       name={lap.name}
       price={lap.price}
       brand={lap.brand}
@@ -170,7 +170,7 @@ function Home() {
         <h2>Mobiles</h2>
         {mobiles.map((mob) => (
       <HomeCard
-      key={mob.id}
+      id={mob.id}
       name={mob.name}
       price={mob.price}
       brand={mob.brand}
@@ -186,7 +186,7 @@ function Home() {
         <h2>Consoles</h2>
         {consoles.map((con) => (
       <HomeCard
-      key={con.id}
+      id={con.id}
       name={con.name}
       price={con.price}
       brand={con.brand}
