@@ -2,26 +2,23 @@ import React from 'react';
 
 function Navbar() {
     return(<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">E-store</a>
+        <a class="navbar-brand" href="/">E-store</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <li class="nav-item">
+              <a class="nav-link" href="/laptop">Laptops</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Laptops</a>
+              <a class="nav-link" href="/pc">Pc's</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Pc's</a>
+              <a class="nav-link" href="/mobile">Mobiles</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Mobiles</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Consoles</a>
+              <a class="nav-link" href="/console">Consoles</a>
             </li>
           </ul>
         </div>

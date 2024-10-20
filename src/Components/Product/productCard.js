@@ -1,14 +1,14 @@
 import { Fragment } from "react";
 import React from "react";
 import "./productCard.scss";
-function ProductCard({id,name,price,brand,rating,desc,imageUrl}) {
+function ProductCard({id,name,type,price,brand,rating,desc,imageUrl}) {
   return (
 <Fragment>
 
 <div
       className="product-container" 
       style={{ width: '18rem' }} 
-      onClick={() => window.location.href = `/detail/${id}`}>
+      onClick={() => window.location.href = `/${type}/${id}`}>
 
       <img className="product-image" src={imageUrl} alt={name} />
       <div className="product-info">

@@ -22,7 +22,7 @@ function Home() {
             .filter((product) => product.type === "pc")
             .map((pc) => (
               <ProductCard
-                key={pc.id}
+                type={pc.type}
                 id={pc.id}
                 name={pc.name}
                 price={pc.price}
@@ -43,7 +43,7 @@ function Home() {
             .filter((product) => product.type === "laptop")
             .map((lap) => (
               <ProductCard
-                key={lap.id}
+                type={lap.type}
                 id={lap.id}
                 name={lap.name}
                 price={lap.price}
@@ -64,7 +64,7 @@ function Home() {
             .filter((product) => product.type === "mobile")
             .map((mob) => (
               <ProductCard
-                key={mob.id}
+                type={mob.type}
                 id={mob.id}
                 name={mob.name}
                 price={mob.price}
@@ -85,7 +85,7 @@ function Home() {
             .filter((product) => product.type === "console")
             .map((con) => (
               <ProductCard
-                key={con.id}
+                type={con.type}
                 id={con.id}
                 name={con.name}
                 price={con.price}
