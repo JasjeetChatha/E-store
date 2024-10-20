@@ -4,7 +4,7 @@
     margin: 20px 0;          /* Margin for spacing between categories */
   }
   
-  .pc, .laptop, .Mobile, .Console {
+  .pc, .laptop, .mobile, .console {
     display: flex;            /* Use flexbox for card containers */
     flex-wrap: wrap;         /* Allow wrapping of cards to the next line */
     justify-content: space-around; /* Distribute space between cards */
