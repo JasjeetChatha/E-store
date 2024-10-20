@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import HomeCard from "../Product/productCard";
+import ProductCard from "../Product/productCard";
 import './Home-CSS/Home.scss';
 import { products } from "../Data/Data";
 function Home() {
@@ -21,8 +21,8 @@ function Home() {
           {products
             .filter((product) => product.type === "pc")
             .map((pc) => (
-              <HomeCard
-                key={pc.id}
+              <ProductCard
+                type={pc.type}
                 id={pc.id}
                 name={pc.name}
                 price={pc.price}
@@ -42,8 +42,8 @@ function Home() {
           {products
             .filter((product) => product.type === "laptop")
             .map((lap) => (
-              <HomeCard
-                key={lap.id}
+              <ProductCard
+                type={lap.type}
                 id={lap.id}
                 name={lap.name}
                 price={lap.price}
@@ -63,8 +63,8 @@ function Home() {
           {products
             .filter((product) => product.type === "mobile")
             .map((mob) => (
-              <HomeCard
-                key={mob.id}
+              <ProductCard
+                type={mob.type}
                 id={mob.id}
                 name={mob.name}
                 price={mob.price}
@@ -84,8 +84,8 @@ function Home() {
           {products
             .filter((product) => product.type === "console")
             .map((con) => (
-              <HomeCard
-                key={con.id}
+              <ProductCard
+                type={con.type}
                 id={con.id}
                 name={con.name}
                 price={con.price}
