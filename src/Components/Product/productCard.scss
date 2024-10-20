@@ -1,0 +1,94 @@
+// Darker Theme Colors
+$primary-color: #0b0c10;  // Dark background
+$secondary-color: #1f2833; // Secondary dark background
+$accent-color: #66fcf1;    // Accent color (light cyan)
+$hover-color: #45a29e;     // Slightly darker cyan for hover
+$button-color: #c5c6c7;    // Button color (light gray)
+$shadow-color: rgba(0, 0, 0, 0.2); // Darker shadow
+.product-container {
+    width: 18rem;
+    background-color: $secondary-color; /* $secondary-color */
+    box-shadow: 0 8px 16px $shadow-color; /* $shadow-color */
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+  
+    &:hover {
+      transform: scale(1.02);
+    }
+  
+    .product-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px $shadow-color; /* $shadow-color */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 12px 24px $shadow-color;
+      }
+    }
+  
+    .product-info {
+      padding: 20px;
+  
+      .product-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: $accent-color; /* $accent-color */
+      }
+  
+      .product-desc {
+        color: lighten($accent-color, 20%); /* $primary-color */
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+    }
+  
+    .product-details {
+      list-style: none;
+      padding: 0;
+  
+      .product-detail {
+        font-size: 1rem;
+        color: $accent-color; /* $accent-color */
+  
+        &:not(:last-child) {
+          margin-bottom: 8px;
+        }
+      }
+    }
+  
+    .product-actions {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+  
+      .btn {
+        padding: 8px 16px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        outline: none;
+  
+        &:hover {
+          transform: scale(1.05);
+        }
+  
+        &.btn-add-to-cart {
+          background-color: $button-color; /* $button-color */
+          color: $primary-color; /* $primary-color */
+        }
+  
+        &.btn-buy-now {
+          background-color: #ff4c68; /* Vibrant red */
+          color: $accent-color; /* $accent-color */
+        }
+      }
+    }
+  }
+  
