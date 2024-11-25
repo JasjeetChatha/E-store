@@ -1,10 +1,10 @@
-// Darker Theme Colors
-$primary-color: #0b0c10;  // Dark background
-$secondary-color: #1f2833; // Secondary dark background
-$accent-color: #66fcf1;    // Accent color (light cyan)
-$hover-color: #45a29e;     // Slightly darker cyan for hover
-$button-color: #c5c6c7;    // Button color (light gray)
-$shadow-color: rgba(0, 0, 0, 0.2); // Darker shadow
+$primary-color: #1d1f21;  // Dark background (Deep charcoal)
+$secondary-color: #2a2d33; // Secondary background (Muted dark gray)
+$accent-color: #4c9ccf;    // Accent color (Calm blue)
+$hover-color: #3a7c92;     // Hover color (Muted teal)
+$button-color: #585d63;    // Button color (Subtle gray)
+$shadow-color: rgba(0, 0, 0, 0.15); // Softer shadow for professional look
+$button-hover: #3a7c92; 
 .product-container {
     width: 18rem;
     background-color: $secondary-color; /* $secondary-color */

@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import { products } from "../Data/Data";
 import "./productDetail.scss";
 function ProductDetail() {
-    const { id } = useParams(); // Get the product ID from the URL
-    const product = products.find((prod) => prod.id === parseInt(id)); // Find the product by ID
+    const { id } = useParams();
+    const product = products.find((prod) => prod.id === parseInt(id)); 
     if (!product) {
       return <h2>Product not found!</h2>; // Handle case when product is not found
     }

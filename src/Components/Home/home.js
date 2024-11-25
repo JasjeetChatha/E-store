@@ -18,20 +18,18 @@ function Home() {
       <div className="container">
         <div className="pc">
           <h2>PCs</h2>
-          {products
-            .filter((product) => product.type === "pc")
-            .map((pc) => (
+          {products.filter(product => product.type === "pc").map(product => (
               <ProductCard
-                type={pc.type}
-                id={pc.id}
-                name={pc.name}
-                price={pc.price}
-                brand={pc.brand}
-                rating={pc.rating}
-                desc={pc.desc}
-                imageUrl={pc.imageUrl}
-              />
-            ))}
+                type={product.type}
+                id={product.id}
+                name={product.name}
+                price={product.price}
+                brand={product.brand}
+                rating={product.rating}
+                desc={product.desc}
+                imageUrl={product.imageUrl}
+              />))}
+            
         </div>
       </div>
 
@@ -39,41 +37,36 @@ function Home() {
       <div className="container">
         <div className="laptop">
           <h2>Laptops</h2>
-          {products
-            .filter((product) => product.type === "laptop")
-            .map((lap) => (
+          {products.filter(product=> product.type ==="laptop").map(product=>(
               <ProductCard
-                type={lap.type}
-                id={lap.id}
-                name={lap.name}
-                price={lap.price}
-                brand={lap.brand}
-                rating={lap.rating}
-                desc={lap.desc}
-                imageUrl={lap.imageUrl}
-              />
-            ))}
+                type={product.type}
+                id={product.id}
+                name={product.name}
+                price={product.price}
+                brand={product.brand}
+                rating={product.rating}
+                desc={product.desc}
+                imageUrl={product.imageUrl}
+              />))}
+            
         </div>
       </div>
 
       {/* Mobiles */}
       <div className="container">
         <div className="mobile">
-          <h2>Mobiles</h2>
-          {products
-            .filter((product) => product.type === "mobile")
-            .map((mob) => (
+          {products.filter(product=> product.type === "mobile").map(product=>(
               <ProductCard
-                type={mob.type}
-                id={mob.id}
-                name={mob.name}
-                price={mob.price}
-                brand={mob.brand}
-                rating={mob.rating}
-                desc={mob.desc}
-                imageUrl={mob.imageUrl}
-              />
-            ))}
+                type={product.type}
+                id={product.id}
+                name={product.name}
+                price={product.price}
+                brand={product.brand}
+                rating={product.rating}
+                desc={product.desc}
+                imageUrl={product.imageUrl}
+              />))}
+           
         </div>
       </div>
 
@@ -81,20 +74,18 @@ function Home() {
       <div className="container">
         <div className="console">
           <h2>Consoles</h2>
-          {products
-            .filter((product) => product.type === "console")
-            .map((con) => (
+          {products.filter(product=> product.type ==="console").map(product=>(
               <ProductCard
-                type={con.type}
-                id={con.id}
-                name={con.name}
-                price={con.price}
-                brand={con.brand}
-                rating={con.rating}
-                desc={con.desc}
-                imageUrl={con.imageUrl}
-              />
-            ))}
+                type={product.type}
+                id={product.id}
+                name={product.name}
+                price={product.price}
+                brand={product.brand}
+                rating={product.rating}
+                desc={product.desc}
+                imageUrl={product.imageUrl}
+              />))}
+           
         </div>
       </div>
     </Fragment>

@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import React from "react";
 import "./productCard.scss";
 function ProductCard({id,name,type,price,brand,rating,desc,imageUrl}) {
+  
   return (
 <Fragment>
 

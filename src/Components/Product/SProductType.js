@@ -4,16 +4,14 @@ import { products } from "../Data/Data"; // Assuming you have a products data fi
 import ProductCard from "./productCard"; // Assuming you have a ProductCard component
 
 function SProductType() {
-    const { type } = useParams(); // Get the type from URL params
-    const filteredProducts = products.filter((product) => product.type === type); // Filter products by type
-
+    const params = useParams();
+    const productType= params.type;
+    const filteredProducts = products.filter((prod) => prod.type === productType);
     return (
         <div className="container">
-            <h2>{type.charAt(0).toUpperCase() + type.slice(1)}s</h2>
+            <h2>{productType.charAt(0).toUpperCase() +productType.slice(1)}s</h2>
             <br /><br />
-            <div className={type}>
-                {filteredProducts.length > 0 ? (
-                    filteredProducts.map((product) => (
+            {filteredProducts.map((product) => (
                         <ProductCard
                             key={product.id}
                             id={product.id}
@@ -24,13 +22,10 @@ function SProductType() {
                             desc={product.desc}
                             imageUrl={product.imageUrl}
                         />
-                    ))
-                ) : (
-                    <p>No products found for {type}</p>
-                )}
-            </div>
-        </div>
-    );
-}
+            ))}
+            </div>            
 
+);
+
+}
 export default SProductType;
