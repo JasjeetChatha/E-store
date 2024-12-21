@@ -1,35 +1,31 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
+import axios from "axios";
 import ProductCard from "../Product/productCard";
-import './Home-CSS/Home.scss';
+import "./Home-CSS/Home.scss";
 import { products } from "../Data/Data";
-function Home() {
-  
+function Home() { 
+
   return (
     <Fragment>
       <h1>Welcome to E-store</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
         voluptates, voluptate, quas, tempora quia quae quod dolorum doloremque
-        voluptatem quibusdam laboriosam. Quod, voluptatem. Quisquam voluptates,
-        voluptate, quas, tempora quia quae quod dolorum doloremque voluptatem
-        quibusdam laboriosam. Quod, voluptatem.
+        voluptatem quibusdam laboriosam. Quod, voluptatem.
       </p>
+
       {/* PCs */}
       <div className="container">
         <div className="pc">
           <h2>PCs</h2>
-          {products.filter(product => product.type === "pc").map(product => (
+          {products
+            .filter((product) => product.type === "pc")
+            .map((product) => (
               <ProductCard
-                type={product.type}
-                id={product.id}
-                name={product.name}
-                price={product.price}
-                brand={product.brand}
-                rating={product.rating}
-                desc={product.desc}
-                imageUrl={product.imageUrl}
-              />))}
-            
+                key={product.id}
+                {...product}
+              />
+            ))}
         </div>
       </div>
 
@@ -37,36 +33,29 @@ function Home() {
       <div className="container">
         <div className="laptop">
           <h2>Laptops</h2>
-          {products.filter(product=> product.type ==="laptop").map(product=>(
+          {products
+            .filter((product) => product.type === "laptop")
+            .map((product) => (
               <ProductCard
-                type={product.type}
-                id={product.id}
-                name={product.name}
-                price={product.price}
-                brand={product.brand}
-                rating={product.rating}
-                desc={product.desc}
-                imageUrl={product.imageUrl}
-              />))}
-            
+                key={product.id}
+                {...product}
+              />
+            ))}
         </div>
       </div>
 
       {/* Mobiles */}
       <div className="container">
         <div className="mobile">
-          {products.filter(product=> product.type === "mobile").map(product=>(
+          <h2>Mobiles</h2>
+          {products
+            .filter((product) => product.type === "mobile")
+            .map((product) => (
               <ProductCard
-                type={product.type}
-                id={product.id}
-                name={product.name}
-                price={product.price}
-                brand={product.brand}
-                rating={product.rating}
-                desc={product.desc}
-                imageUrl={product.imageUrl}
-              />))}
-           
+                key={product.id}
+                {...product}
+              />
+            ))}
         </div>
       </div>
 
@@ -74,22 +63,21 @@ function Home() {
       <div className="container">
         <div className="console">
           <h2>Consoles</h2>
-          {products.filter(product=> product.type ==="console").map(product=>(
+          {products
+            .filter((product) => product.type === "console")
+            .map((product) => (
               <ProductCard
-                type={product.type}
-                id={product.id}
-                name={product.name}
-                price={product.price}
-                brand={product.brand}
-                rating={product.rating}
-                desc={product.desc}
-                imageUrl={product.imageUrl}
-              />))}
-           
+                key={product.id}
+                {...product}
+              />
+            ))}
         </div>
       </div>
+      function addToCart(name,price,imageUrl){
+
+      }
     </Fragment>
   );
-};
+}
 
 export default Home;
