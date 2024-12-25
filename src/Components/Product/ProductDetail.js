@@ -8,7 +8,18 @@ function ProductDetail() {
   if (!product) {
     return <h2>Product not found!</h2>; // Handle case when product is not found
   }
-
+  const addToCart = (productId, name, price, imageUrl) => {
+    fetch("http://localhost:3000/cart", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        productId,
+        name,
+        price,
+        imageUrl,
+        quantity: 1,
+      }),
+    })};
   return (
     <div className="product-detail-container">
       <div className="product-image-section">
@@ -34,8 +45,8 @@ function ProductDetail() {
         </div>
 
         <div className="product-actions">
-          <button className="btn btn-add-to-cart">Add to Cart</button>
-          <button className="btn btn-buy-now">Buy Now</button>
+          <button className="btn btn-add-to-cart"  onClick={() => addToCart(product)}>Add to Cart</button>
+          <button className="btn btn-buy-now" >Buy Now</button>
         </div>
       </div>
     </div>

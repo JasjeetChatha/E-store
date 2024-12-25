@@ -1,17 +1,43 @@
-import React, { Fragment, useState, useEffect } from "react";
-import axios from "axios";
+import React, {Fragment} from "react";
 import ProductCard from "../Product/productCard";
 import "./Home-CSS/Home.scss";
-import { products } from "../Data/Data";
-function Home() { 
+import {products} from "../Data/Data";
+function Home() {
+  const addToCart = (productId, name, price, imageUrl) => {
+    fetch("http://localhost:3000/cart", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        productId,
+        name,
+        price,
+        imageUrl,
+        quantity: 1,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Assuming the response returns the updated cart
+        const cartDiv = document.getElementById("cart");
+        cartDiv.innerHTML = ""; // Clear the existing cart
 
+        data.forEach((item) => {
+          const itemDiv = document.createElement("div");
+          itemDiv.innerHTML = `<p>${item.name} - $${item.price} x ${item.quantity}</p>`;
+          cartDiv.appendChild(itemDiv);
+        });
+      })
+      .catch((error) => console.error("Error adding to cart:", error));
+  };
   return (
     <Fragment>
       <h1>Welcome to E-store</h1>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-        voluptates, voluptate, quas, tempora quia quae quod dolorum doloremque
-        voluptatem quibusdam laboriosam. Quod, voluptatem.
+       <b> Welcome to E-store!</b> <i>Discover the latest and greatest in tech – from
+        powerful PCs and sleek laptops to cutting-edge consoles and the hottest
+        smartphones. Whether you're upgrading your gear or shopping for the best
+        deals, we've got something for everyone. Dive into our world of
+        innovation and find your perfect tech companion today!</i>
       </p>
 
       {/* PCs */}
@@ -24,6 +50,7 @@ function Home() {
               <ProductCard
                 key={product.id}
                 {...product}
+                onAddToCart={addToCart}
               />
             ))}
         </div>
@@ -39,6 +66,7 @@ function Home() {
               <ProductCard
                 key={product.id}
                 {...product}
+                onAddToCart={addToCart}
               />
             ))}
         </div>
@@ -54,6 +82,7 @@ function Home() {
               <ProductCard
                 key={product.id}
                 {...product}
+                onAddToCart={addToCart}
               />
             ))}
         </div>
@@ -69,13 +98,11 @@ function Home() {
               <ProductCard
                 key={product.id}
                 {...product}
+                onAddToCart={addToCart}
               />
             ))}
         </div>
       </div>
-      function addToCart(name,price,imageUrl){
-
-      }
     </Fragment>
   );
 }

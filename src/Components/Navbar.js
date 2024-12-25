@@ -2,7 +2,7 @@ import React from "react";
 
 function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="/">
         E-store
       </a>
@@ -37,6 +37,11 @@ function Navbar() {
           <li className="nav-item">
             <a className="nav-link" href="/console">
               Consoles
+            </a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="/cart">
+              Cart
             </a>
           </li>
         </ul>
