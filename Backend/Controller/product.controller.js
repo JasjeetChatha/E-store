@@ -1,3 +1,6 @@
+import mongoose from "mongoose";
+import Product from "../Beans/product.bean.js"
+
 //GET ALL PRODUCTS
 export const getAllProducts = async (req, res) => {
     try {
@@ -8,6 +11,17 @@ export const getAllProducts = async (req, res) => {
       return res.status(500).json({success: false, message: "Server error"});
     }
   };
+  //GET ONE PRODUCT
+  export const getProductById = async(req,res) =>{
+    const {id}= req.params;
+    
+    try{
+        const product = await Product.findById(id);
+        res.status(200).json({success:true,data:product})
+    }catch (error){
+        res.status(404).json({success:false,message:'Product not found'});
+    }
+  }
 //CREATE A PRODUCT
   export const createProduct = async (req, res) => {
     const product = req.body;
