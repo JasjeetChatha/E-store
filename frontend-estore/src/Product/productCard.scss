@@ -1,0 +1,113 @@
+// Color Palette
+$primary-color: #3D52A0;  // Deep Purple for primary text and dark background
+$secondary-color: #7091E6; // Soft Blue for secondary background elements
+$accent-color: #ffffff;    // Muted Light Blue for accents and highlights
+$button-color: #ADBBDA;    // Pale Grayish Blue for buttons
+$hover-color: #EDE8F5;     // Very Light Lavender for hover effects
+$shadow-color: rgba(0, 0, 0, 0.2); // Slightly darker shadow for better contrast
+
+// Product Container Styles
+.product-container {
+    width: 18rem;
+    background-color: $secondary-color; /* Soft Blue background */
+    box-shadow: 0 8px 16px $shadow-color; /* Shadow for depth */
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+    overflow: hidden;  // Prevents content overflow from rounded corners
+
+    &:hover {
+      transform: scale(1.02); // Slight zoom effect on hover
+    }
+
+    // Product Image Styling
+    .product-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px $shadow-color; // Shadow around the image
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05); // Slight zoom effect on hover
+        box-shadow: 0 12px 24px $shadow-color; // Enhance shadow on hover
+      }
+    }
+
+    // Product Information Section
+    .product-info {
+      padding: 20px;
+      color: $primary-color;  // Primary color for text
+
+      .product-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: $primary-color;  // Title in Deep Purple
+      }
+
+      .product-desc {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: lighten($accent-color, 10%);  // Lighter accent for description
+      }
+    }
+
+    // Product Details (Brand, Rating, Price)
+    .product-details {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+
+      .product-detail {
+        font-size: 1rem;
+        color: $accent-color;  // Muted light blue for details
+
+        &:not(:last-child) {
+          margin-bottom: 8px;
+        }
+      }
+    }
+
+    // Product Action Buttons
+    .product-actions {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+
+      .btn {
+        padding: 8px 16px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        outline: none;
+        border: none;
+
+        &:hover {
+          transform: scale(1.05); // Slight zoom effect on hover
+        }
+
+        // Add To Cart Button Styling
+        &.btn-add-to-cart {
+          background-color: $button-color;  // Pale Grayish Blue button
+          color: $primary-color;  // Dark text for contrast
+
+          &:hover {
+            background-color: $hover-color; // Very Light Lavender on hover
+          }
+        }
+
+        // Buy Now Button Styling
+        &.btn-buy-now {
+          background-color: #ff4c68;  // Vibrant red for "Buy Now"
+          color: $primary-color;  // Dark text for contrast
+
+          &:hover {
+            background-color: darken(#ff4c68, 10%); // Darken on hover
+          }
+        }
+      }
+    }
+  }

@@ -1,6 +1,8 @@
-import express from "express";
 import dotenv from "dotenv";
+dotenv.config();
+import express from "express";
 import {connectDB} from "./config/db.js";
+import cors from "cors";
 import {
   getAllProducts,
   createProduct,
@@ -10,11 +12,15 @@ import {
 } from "./Controller/product.controller.js";
 
 // Load environment variables
-dotenv.config();
 
 const app = express();
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 app.use(express.json());
-const PORT = process.env.PORT
+const PORT = process.env.PORT;
 app.get("/products", getAllProducts);
 app.get("/products/:id", getProductById);
 app.post("/products", createProduct);
@@ -23,5 +29,5 @@ app.delete("/delete/:id", deleteProduct);
 
 app.listen(PORT, () => {
   connectDB();
-  console.log("Server is running on port "+PORT+" yo");
+  console.log("Server is running on port " + PORT + " yo");
 });
