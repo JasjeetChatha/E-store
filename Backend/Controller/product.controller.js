@@ -45,7 +45,7 @@ export const createProduct = async (req, res) => {
       .json({success: true, message: "Product Added Successfully"});
   } catch (error) {
     console.error(error.message);
-    res.status(500).json({success: true, message: "server error"});
+    res.status(500).json({success: false, message: "server error"});
   }
 };
 //UPDATE A PRODUCT

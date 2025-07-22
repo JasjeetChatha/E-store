@@ -1,5 +1,5 @@
 import React from "react";
-
+import {GoogleLogin} from "@react-oauth/google";
 function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -43,6 +43,9 @@ function Navbar() {
             <a className="nav-link" href="/cart">
               Cart
             </a>
+          </li>
+          <li className="nav-item">
+            <GoogleLogin>Login</GoogleLogin>
           </li>
         </ul>
       </div>

@@ -1,30 +1,30 @@
-import {React, Fragment} from "react";
+import {React} from "react";
 import "./productCard.scss";
-function ProductCard({id, name, type, price, brand, rating, desc, imageUrl,onAddToCart }) {
+function ProductCard({product}) {
   return (
-    <Fragment>
+  
       <div
         className="product-container"
         style={{width: "18rem"}}
-        onClick={() => (window.location.href = `/${type}/${id}`)}
+        onClick={() => (window.location.href = `/${product.type}/${product.typeid}`)}
       >
-        <img className="product-image" src={imageUrl} alt={name} />
+        <img className="product-image" src={product.typeimageUrl} alt={product.typename} />
         <div className="product-info">
-          <h5 className="product-title">{name}</h5>
-          <p className="product-desc"><i>{desc}</i></p>
+          <h5 className="product-title">{product.typename}</h5>
+          <p className="product-desc"><i>{product.typedesc}</i></p>
         </div>
         <ul className="product-details">
           <li className="product-detail">
             <b>Brand: </b>
-            {brand}
+            {product.typebrand}
           </li>
           <li className="product-detail">
             <b>Rating: </b>
-            {rating}
+            {product.typerating}
           </li>
           <li className="product-detail">
             <b>Price: </b>
-            {price}
+            {product.typeprice}
           </li>
         </ul>
         <div className="product-actions">
@@ -36,7 +36,7 @@ function ProductCard({id, name, type, price, brand, rating, desc, imageUrl,onAdd
           </button>
         </div>
       </div>
-    </Fragment>
+    
   );
 }
 

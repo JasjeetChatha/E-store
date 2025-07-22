@@ -1,3 +1,5 @@
+@use 'sass:color'; // 👈 Required for color.adjust
+
 // Color Palette
 $primary-color: #3D52A0;  // Deep Purple for primary text and dark background
 $secondary-color: #7091E6; // Soft Blue for secondary background elements
@@ -15,13 +17,13 @@ $shadow-color: rgba(0, 0, 0, 0.2); // Slightly darker shadow for better contrast
   max-width: 1100px;
   margin: 50px auto;
   padding: 20px;
-  background-color: $secondary-color; /* Secondary dark background */
-  box-shadow: 0 8px 16px $shadow-color; /* Darker shadow for container */
+  background-color: $secondary-color;
+  box-shadow: 0 8px 16px $shadow-color;
   border-radius: 12px;
   transition: transform 0.3s ease;
 
   &:hover {
-    transform: scale(1.02); /* Slight scale on hover */
+    transform: scale(1.02);
   }
 }
 
@@ -37,12 +39,12 @@ $shadow-color: rgba(0, 0, 0, 0.2); // Slightly darker shadow for better contrast
     max-width: 100%;
     height: auto;
     border-radius: 10px;
-    box-shadow: 0 6px 12px $shadow-color; /* Shadow for image */
+    box-shadow: 0 6px 12px $shadow-color;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 
     &:hover {
-      transform: scale(1.05); /* Slight zoom effect on hover */
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+      transform: scale(1.05);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
     }
   }
 }
@@ -54,9 +56,9 @@ $shadow-color: rgba(0, 0, 0, 0.2); // Slightly darker shadow for better contrast
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: $primary-color; /* Dark background */
+  background-color: $primary-color;
   border-radius: 10px;
-  color: $accent-color; /* Light cyan for text */
+  color: $accent-color;
 }
 
 // Product Name
@@ -64,7 +66,7 @@ $shadow-color: rgba(0, 0, 0, 0.2); // Slightly darker shadow for better contrast
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 20px;
-  color: $accent-color; /* Light cyan for title */
+  color: $accent-color;
 }
 
 // Product Details
@@ -74,11 +76,11 @@ $shadow-color: rgba(0, 0, 0, 0.2); // Slightly darker shadow for better contrast
   p {
     font-size: 1.2rem;
     margin: 10px 0;
-    color: $accent-color; /* Light cyan for all details */
+    color: $accent-color;
   }
 
   .product-description {
-    color: lighten($primary-color, 20%); /* Lighten primary color for description */
+    color: color.adjust($primary-color, $lightness: 20%);
     font-size: 1rem;
     line-height: 1.6;
   }
@@ -91,7 +93,7 @@ $shadow-color: rgba(0, 0, 0, 0.2); // Slightly darker shadow for better contrast
   .product-price {
     font-size: 2.5rem;
     font-weight: bold;
-    color: $accent-color; /* Light cyan for price */
+    color: $accent-color;
   }
 }
 
@@ -102,7 +104,7 @@ $shadow-color: rgba(0, 0, 0, 0.2); // Slightly darker shadow for better contrast
 
   .btn {
     position: relative;
-    overflow: hidden; /* To hide the ripple effect overflow */
+    overflow: hidden;
     padding: 8px 16px;
     font-size: 1rem;
     font-weight: 600;
@@ -117,7 +119,7 @@ $shadow-color: rgba(0, 0, 0, 0.2); // Slightly darker shadow for better contrast
       position: absolute;
       width: 0;
       height: 0;
-      background-color: lighten($button-color, 10%);
+      background-color: color.adjust($button-color, $lightness: 10%);
       border-radius: 50%;
       transform: scale(1);
       transition: width 0.4s ease, height 0.4s ease, opacity 0.8s ease;
@@ -132,21 +134,20 @@ $shadow-color: rgba(0, 0, 0, 0.2); // Slightly darker shadow for better contrast
 
     &.btn-add-to-cart {
       background-color: $button-color;
-      color: $primary-color; /* Dark color for text on button */
+      color: $primary-color;
 
       &:hover {
-        background-color: darken($button-color, 10%);
+        background-color: color.adjust($button-color, $lightness: -10%);
         transform: scale(1.05);
       }
     }
 
-    // Buy Now Button with New Color
     &.btn-buy-now {
-      background-color: #ff4c68; /* Vibrant red for "Buy Now" */
-      color: $accent-color; /* Light cyan for button text */
+      background-color: #ff4c68;
+      color: $accent-color;
 
       &:hover {
-        background-color: darken(#ff4c68, 10%);
+        background-color: color.adjust(#ff4c68, $lightness: -10%);
         transform: scale(1.05);
       }
     }
@@ -161,7 +162,7 @@ $shadow-color: rgba(0, 0, 0, 0.2); // Slightly darker shadow for better contrast
   &:before {
     content: "";
     position: absolute;
-    background-color: lighten($button-color, 10%);
+    background-color: color.adjust($button-color, $lightness: 10%);
     border-radius: 50%;
     transform: scale(0);
     width: 0;
@@ -177,7 +178,6 @@ $shadow-color: rgba(0, 0, 0, 0.2); // Slightly darker shadow for better contrast
     opacity: 0;
   }
 
-  // Start the ripple effect from the click point (not the center)
   &:active {
     &:before {
       top: var(--ripple-y);
