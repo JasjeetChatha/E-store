@@ -1,6 +1,6 @@
 import React from "react";
 import {useParams} from "react-router-dom";
-import {products} from "../../Data/Products.json";
+import products from "../../Data/Products.json";
 import "./productDetail.scss";
 function ProductDetail() {
   const {id} = useParams();
@@ -8,18 +8,7 @@ function ProductDetail() {
   if (!product) {
     return <h2>Product not found!</h2>; // Handle case when product is not found
   }
-  const addToCart = (productId, name, price, imageUrl) => {
-    fetch("http://localhost:3000/cart", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({
-        productId,
-        name,
-        price,
-        imageUrl,
-        quantity: 1,
-      }),
-    })};
+ 
   return (
     <div className="product-detail-container">
       <div className="product-image-section">

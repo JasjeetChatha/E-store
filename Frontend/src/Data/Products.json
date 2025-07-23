@@ -10,7 +10,8 @@
     "inStock": 25,
     "colors": ["black", "silver", "gold"],
     "tags": ["apple", "ios", "smartphone"],
-    "discount": 10
+    "discount": 10,
+    "brand": "Apple"
   },
   {
     "id": 2,
@@ -23,7 +24,8 @@
     "inStock": 15,
     "colors": ["black", "green"],
     "tags": ["samsung", "android", "smartphone"],
-    "discount": 5
+    "discount": 5,
+    "brand": "Samsung"
   },
   {
     "id": 3,
@@ -36,7 +38,8 @@
     "inStock": 12,
     "colors": ["blue", "black"],
     "tags": ["google", "android", "smartphone"],
-    "discount": 0
+    "discount": 0,
+    "brand": "Google"
   },
   {
     "id": 4,
@@ -48,7 +51,8 @@
     "rating": 4.7,
     "inStock": 10,
     "tags": ["sony", "gaming", "console"],
-    "discount": 0
+    "discount": 0,
+    "brand": "Sony"
   },
   {
     "id": 5,
@@ -60,7 +64,8 @@
     "rating": 4.5,
     "inStock": 8,
     "tags": ["microsoft", "gaming", "console"],
-    "discount": 15
+    "discount": 15,
+    "brand": "Microsoft"
   },
   {
     "id": 6,
@@ -72,7 +77,8 @@
     "rating": 4.6,
     "inStock": 18,
     "tags": ["nintendo", "handheld", "console"],
-    "discount": 5
+    "discount": 5,
+    "brand": "Nintendo"
   },
   {
     "id": 7,
@@ -85,7 +91,8 @@
     "inStock": 6,
     "colors": ["space gray", "silver"],
     "tags": ["apple", "macOS", "laptop"],
-    "discount": 5
+    "discount": 5,
+    "brand": "Apple"
   },
   {
     "id": 8,
@@ -98,7 +105,8 @@
     "inStock": 10,
     "colors": ["black", "white"],
     "tags": ["asus", "windows", "gaming"],
-    "discount": 10
+    "discount": 10,
+    "brand": "ASUS"
   },
   {
     "id": 9,
@@ -111,6 +119,59 @@
     "inStock": 7,
     "colors": ["black", "silver"],
     "tags": ["dell", "windows", "laptop"],
-    "discount": 0
+    "discount": 0,
+    "brand": "Dell"
+  },
+  {
+    "id": 10,
+    "name": "Custom Gaming PC - Ryzen 7 5800X",
+    "type": "pc",
+    "price": 1799,
+    "image": "/images/ryzen7pc.jpg",
+    "description": "High-performance custom gaming PC with Ryzen 7 5800X, RTX 3060 Ti, 16GB RAM, and 1TB SSD.",
+    "rating": 4.8,
+    "inStock": 5,
+    "tags": ["custom", "gaming", "pc", "ryzen"],
+    "discount": 10,
+    "brand": "Custom Build"
+  },
+  {
+    "id": 11,
+    "name": "Dell Alienware Aurora R13",
+    "type": "pc",
+    "price": 2199,
+    "image": "/images/alienwareaurora.jpg",
+    "description": "Powerful Alienware desktop with Intel i7-12700KF, RTX 3070 Ti, 16GB DDR5 RAM, and 1TB NVMe SSD.",
+    "rating": 4.7,
+    "inStock": 7,
+    "tags": ["dell", "alienware", "gaming", "pc", "intel"],
+    "discount": 5,
+    "brand": "Dell"
+  },
+  {
+    "id": 12,
+    "name": "HP Omen 45L",
+    "type": "pc",
+    "price": 1999,
+    "image": "/images/hpomen45l.jpg",
+    "description": "HP's flagship gaming desktop with Intel i9-12900K, RTX 3080, 32GB RAM, and 2TB SSD.",
+    "rating": 4.9,
+    "inStock": 4,
+    "tags": ["hp", "omen", "gaming", "pc", "intel"],
+    "discount": 0,
+    "brand": "HP"
+  },
+  {
+    "id": 13,
+    "name": "Lenovo Legion Tower 7i",
+    "type": "pc",
+    "price": 1599,
+    "image": "/images/legion7i.jpg",
+    "description": "Lenovo's gaming desktop featuring Intel i5-12600K, RTX 3060, 16GB RAM, and 512GB SSD.",
+    "rating": 4.5,
+    "inStock": 9,
+    "tags": ["lenovo", "legion", "gaming", "pc", "intel"],
+    "discount": 7,
+    "brand": "Lenovo"
   }
 ]

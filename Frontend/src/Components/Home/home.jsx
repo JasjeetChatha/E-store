@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import ProductCard from "../Product/productCard";
 import "./Home-CSS/Home.scss";
-import {products} from "../../Data/Products.json";
+import products from "../../Data/Products.json";
 function Home() {
 
     
@@ -30,7 +30,7 @@ function Home() {
       <div className="container">
         <div className="laptop">
           <h2>Laptops</h2>
-          {products.filter((product)=>product.type==="laptops").map((product)=>(
+          {products.filter((product)=>product.type==="laptop").map((product)=>(
             <ProductCard key={product.id} product={product}></ProductCard>
           ))}
         </div>

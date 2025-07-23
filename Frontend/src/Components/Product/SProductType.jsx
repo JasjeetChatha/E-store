@@ -1,6 +1,6 @@
 import React from "react";
 import {useParams} from "react-router-dom";
-import {products} from "../../Data/Products.json"; // Assuming you have a products data file
+import products from "../../Data/Products.json"; // Assuming you have a products data file
 import ProductCard from "./productCard"; // Assuming you have a ProductCard component
 
 function SProductType() {
