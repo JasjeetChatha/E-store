@@ -44,6 +44,9 @@ function Navbar() {
               Cart
             </a>
           </li>
+          <li className="nav-item">
+            
+          </li>
         </ul>
       </div>
     </nav>

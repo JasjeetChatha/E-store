@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // Color Palette
 $primary-color: #3D52A0;  // Deep Purple for primary text and dark background
 $secondary-color: #7091E6; // Soft Blue for secondary background elements
@@ -8,106 +10,101 @@ $shadow-color: rgba(0, 0, 0, 0.2); // Slightly darker shadow for better contrast
 
 // Product Container Styles
 .product-container {
-    width: 18rem;
-    background-color: $secondary-color; /* Soft Blue background */
-    box-shadow: 0 8px 16px $shadow-color; /* Shadow for depth */
-    border-radius: 12px;
+  width: 100%;
+  max-width: 18rem;
+  background-color: $secondary-color;
+  box-shadow: 0 8px 16px $shadow-color;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 20px;
+  overflow: hidden;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  .product-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px $shadow-color;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-bottom: 20px;
-    overflow: hidden;  // Prevents content overflow from rounded corners
 
     &:hover {
-      transform: scale(1.02); // Slight zoom effect on hover
+      transform: scale(1.05);
+      box-shadow: 0 12px 24px $shadow-color;
+    }
+  }
+
+  .product-info {
+    padding: 20px;
+    color: $primary-color;
+
+    .product-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: $primary-color;
     }
 
-    // Product Image Styling
-    .product-image {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 6px 12px $shadow-color; // Shadow around the image
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .product-desc {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: color.adjust($accent-color, $lightness: 10%);
+    }
+  }
+
+  .product-details {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+
+    .product-detail {
+      font-size: 1rem;
+      color: $accent-color;
+
+      &:not(:last-child) {
+        margin-bottom: 8px;
+      }
+    }
+  }
+
+  .product-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+
+    .btn {
+      padding: 8px 16px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      outline: none;
+      border: none;
 
       &:hover {
-        transform: scale(1.05); // Slight zoom effect on hover
-        box-shadow: 0 12px 24px $shadow-color; // Enhance shadow on hover
-      }
-    }
-
-    // Product Information Section
-    .product-info {
-      padding: 20px;
-      color: $primary-color;  // Primary color for text
-
-      .product-title {
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 10px;
-        color: $primary-color;  // Title in Deep Purple
+        transform: scale(1.05);
       }
 
-      .product-desc {
-        font-size: 1rem;
-        line-height: 1.6;
-        color: lighten($accent-color, 10%);  // Lighter accent for description
-      }
-    }
-
-    // Product Details (Brand, Rating, Price)
-    .product-details {
-      list-style: none;
-      padding: 0;
-      margin-top: 10px;
-
-      .product-detail {
-        font-size: 1rem;
-        color: $accent-color;  // Muted light blue for details
-
-        &:not(:last-child) {
-          margin-bottom: 8px;
-        }
-      }
-    }
-
-    // Product Action Buttons
-    .product-actions {
-      display: flex;
-      justify-content: space-between;
-      padding: 20px;
-
-      .btn {
-        padding: 8px 16px;
-        font-size: 1rem;
-        font-weight: 600;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.3s ease;
-        outline: none;
-        border: none;
+      &.btn-add-to-cart {
+        background-color: $button-color;
+        color: $primary-color;
 
         &:hover {
-          transform: scale(1.05); // Slight zoom effect on hover
+          background-color: $hover-color;
         }
+      }
 
-        // Add To Cart Button Styling
-        &.btn-add-to-cart {
-          background-color: $button-color;  // Pale Grayish Blue button
-          color: $primary-color;  // Dark text for contrast
+      &.btn-buy-now {
+        background-color: #ff4c68;
+        color: $primary-color;
 
-          &:hover {
-            background-color: $hover-color; // Very Light Lavender on hover
-          }
-        }
-
-        // Buy Now Button Styling
-        &.btn-buy-now {
-          background-color: #ff4c68;  // Vibrant red for "Buy Now"
-          color: $primary-color;  // Dark text for contrast
-
-          &:hover {
-            background-color: darken(#ff4c68, 10%); // Darken on hover
-          }
+        &:hover {
+          background-color: color.adjust(#ff4c68, $lightness: -10%);
         }
       }
     }
   }
+}

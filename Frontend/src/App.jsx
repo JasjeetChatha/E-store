@@ -7,17 +7,17 @@ import SProductType from "./Components/Product/SProductType";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from "./Components/NotFound";
-import CartPage from "./Components/ShoppingCart/CartPage";
 function App() {
   return (
+     
     <Fragment>
+      
       <Navbar />
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/:type/:id" element={<ProductDetail />} />
           <Route path="/:type" element={<SProductType />} />
-          <Route path="/cart" element={<CartPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
