@@ -1,0 +1,471 @@
+// // Cart Product Container - Sticky Note Style
+// .cart-product-container {
+//   background: $sticky-yellow;
+//   padding: 20px;
+//   border-radius: 8px;
+//   box-shadow: 
+//     3px 3px 8px $shadow-color,
+//     0 0 0 1px rgba(0, 0, 0, 0.05),
+//     inset 0 1px 0 rgba(255, 255, 255, 0.3);
+//   position: relative;
+//   transition: all 0.3s ease;
+//   --rotation: -1deg;
+//   transform: rotate(var(--rotation));
+//   @include floating-animation(random(3) * 1s, 3s + random(2) * 1s);
+//   animation-fill-mode: both;
+  
+//   // Alternate colors and rotations for variety
+//   &:nth-child(2n) {
+//     background: $sticky-pink;
+//     --rotation: 1deg;
+//   }
+  
+//   &:nth-child(3n) {
+//     background: $sticky-blue;
+//     --rotation: -0.5deg;
+//   }
+  
+//   &:nth-child(4n) {
+//     background: $sticky-green;
+//     --rotation: 1.5deg;
+//   }
+  
+//   &:nth-child(5n) {
+//     background: $sticky-orange;
+//     --rotation: -1.5deg;
+//   }
+  
+//   &:nth-child(6n) {
+//     background: $sticky-purple;
+//     --rotation: 0.8deg;
+//   }
+  
+//   // Tape effect at the top
+//   &::before {
+//     content: '';
+//     position: absolute;
+//     top: -8px;
+//     left: 50%;
+//     transform: translateX(-50%);
+//     width: 45px;
+//     height: 18px;
+//     background: rgba(255, 255, 255, 0.7);
+//     border: 1px solid rgba(0, 0, 0, 0.1);
+//     border-radius: 3px;
+//     box-shadow: 
+//       inset 0 1px 2px rgba(0, 0, 0, 0.1),
+//       0 1px 3px rgba(0, 0, 0, 0.1);
+//   }
+  
+//   // Paper texture overlay
+//   &::after {
+//     content: '';
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+//     background: 
+//       radial-gradient(circle at 30% 20%, transparent 50%, rgba(0,0,0,0.02) 51%),
+//       radial-gradient(circle at 70% 80%, transparent 50%, rgba(0,0,0,0.015) 51%);
+//     background-size: 100px 100px, 80px 80px;
+//     border-radius: 8px;
+//     pointer-events: none;
+//     z-index: 0;
+//   }
+  
+//   // Hover effects
+//   &:hover {
+//     transform: rotate(0deg) scale(1.03);
+//     box-shadow: 
+//       5px 5px 20px rgba(0, 0, 0, 0.25),
+//       0 0 0 1px rgba(0, 0, 0, 0.1),
+//       inset 0 1px 0 rgba(255, 255, 255, 0.4);
+//     z-index: 10;
+    
+//     .product-image {
+//       transform: scale(1.02);
+//     }
+    
+//     .btn-quantity {
+//       transform: translateY(-1px);
+//       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+//     }
+//   }
+  
+//   // All child elements should be above the texture overlay
+//   > * {
+//     position: relative;
+//     z-index: 1;
+//   }
+
+//   // Product Image
+//   .product-image {
+//     width: 100%;
+//     height: 200px;
+//     object-fit: cover;
+//     border-radius: 6px;
+//     margin-bottom: 15px;
+//     border: 2px solid rgba(0, 0, 0, 0.1);
+//     filter: sepia(5%) contrast(1.05) brightness(1.02);
+//     transition: all 0.3s ease;
+//     box-shadow: 
+//       0 2px 8px rgba(0, 0, 0, 0.1),
+//       inset 0 1px 0 rgba(255, 255, 255, 0.2);
+//   }
+
+//   // Product Info Section
+//   .product-info {
+//     margin-bottom: 15px;
+
+//     .product-title {
+//       @include handwritten-text;
+//       font-family: 'Caveat', cursive;
+//       font-size: 1.4rem;
+//       font-weight: 600;
+//       margin-bottom: 8px;
+//       color: $pencil-dark;
+//       line-height: 1.3;
+//     }
+
+//     .product-desc {
+//       @include handwritten-text;
+//       font-size: 0.95rem;
+//       line-height: 1.4;
+//       color: $pencil-medium;
+//       margin-bottom: 0;
+      
+//       i {
+//         font-style: normal;
+//         opacity: 0.9;
+//       }
+//     }
+//   }
+
+//   // Product Details List
+//   .product-details {
+//     list-style: none;
+//     padding: 0;
+//     margin: 15px 0;
+    
+//     .product-detail {
+//       @include handwritten-text;
+//       font-size: 0.9rem;
+//       margin-bottom: 5px;
+//       color: $pencil-medium;
+//       position: relative;
+//       padding-left: 8px;
+      
+//       // Hand-drawn bullet points
+//       &::before {
+//         content: '•';
+//         position: absolute;
+//         left: -2px;
+//         color: $pencil-dark;
+//         font-weight: bold;
+//         transform: rotate(random(10) - 5deg);
+//       }
+      
+//       b {
+//         color: $pencil-dark;
+//         font-weight: 600;
+//       }
+//     }
+//   }
+
+//   // Quantity Controls Section
+//   .quantity-controls {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     gap: 15px;
+//     margin-top: 20px;
+//     padding: 10px;
+//     background: rgba(255, 255, 255, 0.3);
+//     border-radius: 25px;
+//     border: 2px dashed rgba(0, 0, 0, 0.2);
+
+//     .btn-quantity {
+//       @include handwritten-text;
+//       font-family: 'Caveat', cursive;
+//       width: 45px;
+//       height: 45px;
+//       border: none;
+//       border-radius: 50%;
+//       font-size: 1.5rem;
+//       font-weight: 700;
+//       cursor: pointer;
+//       transition: all 0.3s ease;
+//       position: relative;
+//       box-shadow: 
+//         0 4px 10px rgba(0, 0, 0, 0.2),
+//         inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      
+//       // Price tag string effect
+//       &::before {
+//         content: '';
+//         position: absolute;
+//         top: -6px;
+//         left: 12px;
+//         width: 1.5px;
+//         height: 10px;
+//         background: rgba(0, 0, 0, 0.3);
+//         transform: rotate(15deg);
+//       }
+
+//       &.btn-remove {
+//         background: #e74c3c;
+//         color: white;
+//         transform: rotate(-2deg);
+        
+//         &:hover {
+//           background: lighten(#e74c3c, 5%);
+//           transform: translateY(-3px) rotate(0deg);
+//           box-shadow: 
+//             0 6px 15px rgba(231, 76, 60, 0.3),
+//             inset 0 1px 0 rgba(255, 255, 255, 0.2);
+//         }
+        
+//         &:active {
+//           background: darken(#e74c3c, 10%);
+//           transform: scale(0.95) rotate(-2deg);
+//         }
+//       }
+
+//       &.btn-add {
+//         background: $sticky-green;
+//         color: white;
+//         transform: rotate(2deg);
+        
+//         &:hover {
+//           background: darken($sticky-green, 5%);
+//           transform: translateY(-3px) rotate(0deg);
+//           box-shadow: 
+//             0 6px 15px rgba(46, 204, 113, 0.3),
+//             inset 0 1px 0 rgba(255, 255, 255, 0.2);
+//         }
+        
+//         &:active {
+//           background: darken($sticky-green, 10%);
+//           transform: scale(0.95) rotate(2deg);
+//         }
+//       }
+//     }
+
+//     .quantity-display {
+//       @include handwritten-text;
+//       font-family: 'Caveat', cursive;
+//       font-size: 1.8rem;
+//       font-weight: 700;
+//       min-width: 50px;
+//       text-align: center;
+//       padding: 12px 18px;
+//       background: rgba(255, 255, 255, 0.8);
+//       border: 3px solid $pencil-dark;
+//       border-radius: 15px;
+//       color: $pencil-dark;
+//       box-shadow: 
+//         inset 0 2px 4px rgba(0, 0, 0, 0.1),
+//         0 2px 8px rgba(0, 0, 0, 0.1);
+//       transform: rotate(-1deg);
+//       position: relative;
+      
+//       // Add a small "qty" label
+//       &::before {
+//         content: 'qty';
+//         position: absolute;
+//         top: -8px;
+//         left: 50%;
+//         transform: translateX(-50%);
+//         font-size: 0.7rem;
+//         color: $pencil-light;
+//         background: rgba(255, 255, 255, 0.9);
+//         padding: 2px 8px;
+//         border-radius: 10px;
+//         border: 1px solid rgba(0, 0, 0, 0.1);
+//       }
+//     }
+//   }
+// }
+
+// // Cart Page Styling
+// .cart-page {
+//   padding: 30px 20px;
+//   background: #f8f9fa;
+//   min-height: 100vh;
+
+//   h2 {
+//     @include handwritten-text;
+//     font-family: 'Caveat', cursive;
+//     font-size: 2.5rem;
+//     font-weight: 700;
+//     text-align: center;
+//     margin-bottom: 30px;
+//     color: $pencil-dark;
+//     transform: rotate(-1deg);
+//   }
+
+//   .cart-summary {
+//     background: $sticky-yellow;
+//     padding: 20px;
+//     border-radius: 15px;
+//     margin-bottom: 30px;
+//     text-align: center;
+//     position: relative;
+//     transform: rotate(0.5deg);
+//     box-shadow: 
+//       3px 3px 8px $shadow-color,
+//       0 0 0 1px rgba(0, 0, 0, 0.05),
+//       inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    
+//     // Tape effect
+//     &::before {
+//       content: '';
+//       position: absolute;
+//       top: -8px;
+//       left: 50%;
+//       transform: translateX(-50%);
+//       width: 60px;
+//       height: 18px;
+//       background: rgba(255, 255, 255, 0.7);
+//       border: 1px solid rgba(0, 0, 0, 0.1);
+//       border-radius: 3px;
+//       box-shadow: 
+//         inset 0 1px 2px rgba(0, 0, 0, 0.1),
+//         0 1px 3px rgba(0, 0, 0, 0.1);
+//     }
+
+//     p {
+//       @include handwritten-text;
+//       font-family: 'Caveat', cursive;
+//       margin: 8px 0;
+//       font-size: 1.4rem;
+//       font-weight: 600;
+//       color: $pencil-dark;
+      
+//       &:first-child {
+//         transform: rotate(-0.5deg);
+//       }
+      
+//       &:last-child {
+//         transform: rotate(0.5deg);
+//         font-size: 1.6rem;
+//       }
+//     }
+//   }
+
+//   .cart-items {
+//     display: grid;
+//     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+//     gap: 25px;
+//     justify-content: center;
+//   }
+// }
+
+// // Responsive Design
+// @media (max-width: 768px) {
+//   .cart-product-container {
+//     padding: 15px;
+//     margin: 0 auto;
+//     max-width: 280px;
+//   }
+  
+//   .product-image {
+//     height: 180px;
+//   }
+  
+//   .product-title {
+//     font-size: 1.3rem;
+//   }
+  
+//   .product-desc {
+//     font-size: 0.9rem;
+//   }
+  
+//   .product-detail {
+//     font-size: 0.85rem;
+//   }
+  
+//   .btn-quantity {
+//     width: 40px !important;
+//     height: 40px !important;
+//     font-size: 1.3rem !important;
+//   }
+  
+//   .quantity-display {
+//     font-size: 1.5rem !important;
+//     padding: 10px 15px !important;
+//   }
+  
+//   .cart-page {
+//     padding: 20px 15px;
+    
+//     h2 {
+//       font-size: 2rem;
+//     }
+    
+//     .cart-items {
+//       grid-template-columns: 1fr;
+//       gap: 20px;
+//     }
+//   }
+// }
+
+// @media (max-width: 480px) {
+//   .cart-product-container {
+//     padding: 12px;
+//     max-width: 260px;
+//   }
+  
+//   .product-image {
+//     height: 160px;
+//   }
+  
+//   .product-title {
+//     font-size: 1.2rem;
+//   }
+  
+//   .quantity-controls {
+//     gap: 10px;
+    
+//     .btn-quantity {
+//       width: 35px !important;
+//       height: 35px !important;
+//       font-size: 1.2rem !important;
+//     }
+    
+//     .quantity-display {
+//       font-size: 1.3rem !important;
+//       padding: 8px 12px !important;
+//       min-width: 40px;
+//     }
+//   }
+  
+//   .cart-page {
+//     padding: 15px 10px;
+    
+//     h2 {
+//       font-size: 1.8rem;
+//     }
+    
+//     .cart-summary {
+//       padding: 15px;
+      
+//       p {
+//         font-size: 1.2rem !important;
+        
+//         &:last-child {
+//           font-size: 1.4rem !important;
+//         }
+//       }
+//     }
+//   }
+// }
+
+// // Animation delays for staggered loading
+// .cart-product-container:nth-child(1) { animation-delay: 0.1s; }
+// .cart-product-container:nth-child(2) { animation-delay: 0.2s; }
+// .cart-product-container:nth-child(3) { animation-delay: 0.3s; }
+// .cart-product-container:nth-child(4) { animation-delay: 0.4s; }
+// .cart-product-container:nth-child(5) { animation-delay: 0.5s; }
+// .cart-product-container:nth-child(6) { animation-delay: 0.6s; }

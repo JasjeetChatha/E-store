@@ -1,14 +1,19 @@
-import React from "react";
+import React,{useContext} from "react";
 import {useParams} from "react-router-dom";
 import products from "../../Data/Products.json";
+import { CartContext } from "../../Context/CartContext";
 import "./productDetail.scss";
 function ProductDetail() {
+
+  const {addToCart}=useContext(CartContext);
+
   const {id} = useParams();
   const product = products.find((prod) => prod.id === parseInt(id));
   if (!product) {
     return <h2>Product not found!</h2>; // Handle case when product is not found
   }
- 
+ console.log("Product loaded:", product);
+
   return (
     <div className="product-detail-container">
       <div className="product-image-section">

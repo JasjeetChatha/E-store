@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React, { Fragment, useContext } from "react";
 import ProductCard from "../Product/productCard";
 import "./Home-CSS/Home.scss";
 import products from "../../Data/Products.json";
@@ -18,8 +18,9 @@ function Home() {
 
       {/* PCs */}
       <div className="container">
+        <h2>PCs</h2>
         <div className="pc">
-          <h2>PCs</h2>
+          
           {products.filter((product)=>product.type==="pc").map((product)=>(
             <ProductCard key={product.id} product={product}></ProductCard>
           ))}
@@ -28,8 +29,9 @@ function Home() {
 
       {/* Laptops */}
       <div className="container">
+        <h2>Laptops</h2>
         <div className="laptop">
-          <h2>Laptops</h2>
+          
           {products.filter((product)=>product.type==="laptop").map((product)=>(
             <ProductCard key={product.id} product={product}></ProductCard>
           ))}
@@ -38,8 +40,9 @@ function Home() {
 
       {/* Mobiles */}
       <div className="container">
+        <h2>Mobiles</h2>
         <div className="mobile">
-          <h2>Mobiles</h2>
+          
           {products.filter((product)=> product.type==="mobile").map((product)=>
           <ProductCard key={product.id} product={product}></ProductCard>)}
         </div>
@@ -47,10 +50,14 @@ function Home() {
 
       {/* Consoles */}
       <div className="container">
+        <h2>Consoles</h2>
         <div className="console">
-          <h2>Consoles</h2>
+          
           {products.filter((product)=>product.type==="console").map
-          ((product)=><ProductCard key={product.id} product={product} ></ProductCard>)}
+          ((product)=><ProductCard 
+          key={product.id} 
+          product={product} />
+          )}
         </div>
       </div>
     </Fragment>

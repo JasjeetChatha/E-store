@@ -1,0 +1,406 @@
+// Import Google Fonts for handwritten look (if not already imported globally)
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Caveat:wght@400;500;600;700&display=swap');
+
+// Variables for consistent theming
+$paper-bg: #fefdf8;
+$pencil-dark: #2c3e50;
+$pencil-medium: #34495e;
+$pencil-light: #7f8c8d;
+$shadow-color: rgba(0, 0, 0, 0.1);
+$accent-yellow: #fff740;
+$accent-blue: #d6e9ff;
+$accent-pink: #ffb3d9;
+
+// Mixins
+@mixin handwritten-text {
+  font-family: 'Kalam', cursive;
+  color: $pencil-dark;
+  text-shadow: 
+    0.5px 0.5px 1px rgba(0, 0, 0, 0.8),
+    -0.3px -0.3px 0.5px rgba(0, 0, 0, 0.3),
+    0.8px 0.8px 2px rgba(0, 0, 0, 0.2);
+  filter: 
+    contrast(1.2) 
+    brightness(0.95) 
+    sepia(0.1);
+}
+
+@mixin pencil-underline {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right, 
+      transparent 0%, 
+      $pencil-medium 20%, 
+      $pencil-medium 80%, 
+      transparent 100%);
+    transform: rotate(-0.5deg);
+    transition: all 0.3s ease;
+  }
+}
+
+@mixin paper-tab {
+  background: $paper-bg;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px 8px 0 0;
+  box-shadow: 
+    0 -2px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  position: relative;
+  
+  // Paper texture
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 30% 20%, transparent 50%, rgba(0,0,0,0.02) 51%),
+      radial-gradient(circle at 70% 80%, transparent 50%, rgba(0,0,0,0.015) 51%);
+    background-size: 60px 60px, 40px 40px;
+    border-radius: 6px 6px 0 0;
+    pointer-events: none;
+  }
+}
+
+// Keyframes
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(1deg); }
+  75% { transform: rotate(-1deg); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+// Navbar - Main container looks like a paper ruler/tab organizer
+.navbar {
+  @include paper-tab;
+  padding: 15px 20px ;
+  margin-bottom: 20px;
+  animation: fadeInDown 0.8s ease-out;
+  border-radius: 0;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+  position: fixed!important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+
+  // Add ruler markings
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: repeating-linear-gradient(
+      to right,
+      transparent 0,
+      transparent 18px,
+      rgba(0, 0, 0, 0.1) 19px,
+      rgba(0, 0, 0, 0.1) 20px,
+      transparent 21px,
+      transparent 50px,
+      rgba(0, 0, 0, 0.2) 51px,
+      rgba(0, 0, 0, 0.2) 52px,
+      transparent 53px
+    );
+  }
+}
+
+// Brand - looks like a hand-drawn logo
+.navbar-brand {
+  @include handwritten-text;
+  font-family: 'Caveat', cursive !important;
+  font-size: 2.2rem !important;
+  font-weight: 700 !important;
+  color: $pencil-dark !important;
+  text-decoration: none !important;
+  @include pencil-underline;
+  position: relative;
+  z-index: 2;
+  
+  // Add a small pencil doodle
+  &::before {
+    content: '✏️';
+    position: absolute;
+    left: -35px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-15deg);
+    font-size: 1.5rem;
+    animation: wiggle 3s ease-in-out infinite;
+  }
+  
+  &:hover {
+    color: $pencil-medium !important;
+    text-decoration: none !important;
+    
+    &::after {
+      background: linear-gradient(to right, 
+        transparent 0%, 
+        $accent-yellow 20%, 
+        $accent-yellow 80%, 
+        transparent 100%);
+      height: 3px;
+    }
+  }
+}
+
+// Mobile toggle button - looks like a paperclip
+.navbar-toggler {
+  border: none !important;
+  padding: 8px 12px !important;
+  background: $accent-yellow !important;
+  border-radius: 50% !important;
+  box-shadow: 
+    0 3px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+  position: relative;
+  
+  &:focus {
+    box-shadow: 
+      0 3px 8px rgba(0, 0, 0, 0.2),
+      0 0 0 3px rgba(255, 247, 64, 0.3) !important;
+  }
+  
+  .navbar-toggler-icon {
+    background-image: none !important;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    
+    &::before,
+    &::after,
+    & {
+      background: $pencil-dark;
+      height: 2px;
+      border-radius: 1px;
+      transition: all 0.3s ease;
+    }
+    
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+    }
+    
+    &::before {
+      top: -6px;
+    }
+    
+    &::after {
+      top: 6px;
+    }
+  }
+  
+  &[aria-expanded="true"] .navbar-toggler-icon {
+    background: transparent;
+    
+    &::before {
+      transform: rotate(45deg);
+      top: 0;
+    }
+    
+    &::after {
+      transform: rotate(-45deg);
+      top: 0;
+    }
+  }
+}
+
+// Navigation list
+.navbar-nav {
+  align-items: center;
+  gap: 10px;
+  
+  .nav-item {
+    position: relative;
+    
+    .nav-link {
+      @include handwritten-text;
+      font-family: 'Caveat', cursive !important;
+      font-size: 1.3rem !important;
+      font-weight: 500 !important;
+      color: $pencil-medium !important;
+      text-decoration: none !important;
+      padding: 10px 16px !important;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+      
+      // Add different colored highlights for each nav item
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: transparent;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+        z-index: -1;
+      }
+      
+      &:hover {
+        color: $pencil-dark !important;
+        transform: translateY(-2px);
+        
+        &::before {
+          background: rgba(255, 247, 64, 0.3);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+      }
+      
+      &:active {
+        transform: translateY(0);
+      }
+    }
+    
+    // Different highlight colors for each category
+    &:nth-child(1) .nav-link:hover::before { background: rgba(214, 233, 255, 0.6); }
+    &:nth-child(2) .nav-link:hover::before { background: rgba(255, 179, 217, 0.6); }
+    &:nth-child(3) .nav-link:hover::before { background: rgba(174, 213, 129, 0.6); }
+    &:nth-child(4) .nav-link:hover::before { background: rgba(255, 183, 77, 0.6); }
+  }
+}
+
+// Cart badge - looks like a sticky note
+.badge {
+  @include handwritten-text;
+  font-family: 'Caveat', cursive !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  background: $accent-yellow !important;
+  color: $pencil-dark !important;
+  border-radius: 50% !important;
+  padding: 4px 8px !important;
+  margin-left: 5px;
+  position: relative;
+  min-width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: rotate(-5deg);
+  animation: bounce 2s ease-in-out infinite;
+}
+
+// Responsive Design
+@media (max-width: 991px) {
+  .navbar-brand {
+    font-size: 1.8rem !important;
+    
+    &::before {
+      left: -30px;
+      font-size: 1.2rem;
+    }
+  }
+  
+  .navbar-collapse {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px dashed rgba(0, 0, 0, 0.1);
+    
+    .navbar-nav {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+      
+      .nav-item {
+        width: 100%;
+        
+        .nav-link {
+          padding: 12px 20px !important;
+          border-radius: 15px;
+          
+          &:hover {
+            transform: translateX(10px);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 12px 15px;
+  }
+  
+  .navbar-brand {
+    font-size: 1.6rem !important;
+    
+    &::before {
+      display: none;
+    }
+  }
+  
+  .navbar-nav .nav-link {
+    font-size: 1.2rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px 12px;
+  }
+  
+  .navbar-brand {
+    font-size: 1.4rem !important;
+  }
+  
+  .navbar-nav .nav-link {
+    font-size: 1.1rem !important;
+    padding: 10px 15px !important;
+  }
+}
+
+// Custom scrollbar for mobile menu
+.navbar-collapse {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+  
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+  }
+}
