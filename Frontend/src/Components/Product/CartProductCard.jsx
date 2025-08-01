@@ -7,7 +7,7 @@ function CartProductCard({ product }) {
   const quantity = getItemQuantity(product.id);
 
   return (
-    <div className="cart-product-container" style={{ width: "18rem" }}>
+    <div className="product-container" style={{ width: "18rem" }}>
       <img 
         className="product-image" 
         src={product.imageUrl} 
