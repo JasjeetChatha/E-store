@@ -1,13 +1,409 @@
+// Import Google Fonts for handwritten look
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Caveat:wght@400;500;600;700&display=swap');
+
+// Variables for consistent theming
+$paper-bg: #f7f4e8;
+$paper-line: #e8dcc0;
+$pencil-dark: #2c3e50;
+$pencil-medium: #34495e;
+$pencil-light: #7f8c8d;
+$shadow-color: rgba(0, 0, 0, 0.1);
+$sticky-yellow: #fff740;
+$sticky-pink: #ff7eb3;
+$sticky-blue: #7fdbff;
+$sticky-green: #2ecc71;
+$sticky-orange: #ff851b;
+
+// Mixins
+@mixin paper-texture {
+  background: 
+    radial-gradient(circle at 100% 50%, transparent 20%, rgba(255,255,255,0.3) 21%, rgba(255,255,255,0.3) 34%, transparent 35%, transparent),
+    linear-gradient(0deg, rgba(0,0,0,.05) 50%, transparent 50%),
+    radial-gradient(ellipse at top, #f8f6f0, #f5f2e8);
+  background-size: 75px 30px, 20px 15px, 100% 100%;
+}
+
+@mixin handwritten-text {
+  font-family: 'Kalam', cursive;
+  color: $pencil-dark;
+  text-shadow: 
+    0.5px 0.5px 1px rgba(0, 0, 0, 0.8),
+    -0.3px -0.3px 0.5px rgba(0, 0, 0, 0.3),
+    0.8px 0.8px 2px rgba(0, 0, 0, 0.2);
+  filter: 
+    contrast(1.2) 
+    brightness(0.95) 
+    sepia(0.1);
+  position: relative;
+  
+  &::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0.5px;
+    left: 0.3px;
+    color: rgba(44, 62, 80, 0.1);
+    z-index: -1;
+    filter: blur(0.3px);
+  }
+}
+
+@mixin pencil-underline {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right, 
+      transparent 0%, 
+      $pencil-medium 20%, 
+      $pencil-medium 80%, 
+      transparent 100%);
+    transform: rotate(-0.5deg);
+  }
+}
+
+@mixin floating-animation($delay: 0s, $duration: 3s) {
+  animation: float $duration ease-in-out infinite $delay;
+}
+
+// Keyframes
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-5px) rotate(0.5deg); }
+  50% { transform: translateY(-10px) rotate(0deg); }
+  75% { transform: translateY(-5px) rotate(-0.5deg); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(1deg); }
+  75% { transform: rotate(-1deg); }
+}
+
+@keyframes pencilDraw {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+// Base styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  @include paper-texture;
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+}
+
+// Main container
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  position: relative;
+}
+
+// Header styles
+h1 {
+  @include handwritten-text;
+  font-family: 'Caveat', cursive;
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 30px;
+  @include pencil-underline;
+  animation: fadeInUp 1s ease-out;
+}
+
+// Welcome paragraph
+p {
+  @include handwritten-text;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin-bottom: 50px;
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  padding: 20px;
+  animation: fadeInUp 1s ease-out 0.3s both;
+  
+  b {
+    font-weight: 700;
+    color: $pencil-dark;
+  }
+  
+  i {
+    font-style: normal;
+    color: $pencil-medium;
+  }
+  
+  // Add doodles around the welcome text
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M20,50 Q30,20 50,50 Q70,80 80,50' stroke='%23666' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    opacity: 0.3;
+  }
+  
+  &::before {
+    top: -10px;
+    left: -20px;
+    transform: rotate(-15deg);
+  }
+  
+  &::after {
+    bottom: -10px;
+    right: -20px;
+    transform: rotate(15deg);
+  }
+}
+
+// Container styles
 .container {
-    display: flex;             /* Enable flexbox layout */
-    flex-direction: column;   /* Stack categories vertically */
-    margin: 20px 0;          /* Margin for spacing between categories */
+  margin-bottom: 60px;
+  animation: fadeInUp 1s ease-out var(--delay, 0.6s) both;
+  
+  &:nth-child(2) { --delay: 0.6s; }
+  &:nth-child(3) { --delay: 0.9s; }
+  &:nth-child(4) { --delay: 1.2s; }
+  &:nth-child(5) { --delay: 1.5s; }
+}
+
+// Section headings
+.pc, .laptop, .mobile, .console {
+  h2 {
+    @include handwritten-text;
+    font-family: 'Caveat', cursive;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+    @include pencil-underline;
+  }
+}
+
+// Product grid
+.pc, .laptop, .mobile, .console {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+// Product card styles (assuming ProductCard component)
+// You can apply these classes to your ProductCard component
+.product-card {
+  background: $sticky-yellow;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 
+    2px 2px 5px $shadow-color,
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  position: relative;
+  transform: rotate(-1deg);
+  transition: all 0.3s ease;
+  @include floating-animation(random(3) * 1s, 3s + random(2) * 1s);
+  
+  &:hover {
+    transform: rotate(0deg) scale(1.02);
+    box-shadow: 
+      4px 4px 15px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+  
+  // Alternate colors for variety
+  &:nth-child(odd) {
+    background: $sticky-pink;
+    transform: rotate(1deg);
+  }
+  
+  &:nth-child(3n) {
+    background: $sticky-blue;
+    transform: rotate(-0.5deg);
+  }
+  
+  &:nth-child(4n) {
+    background: $sticky-green;
+    transform: rotate(1.5deg);
+  }
+  
+  &:nth-child(5n) {
+    background: $sticky-orange;
+    transform: rotate(-1.5deg);
+  }
+  
+  // Tape effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  h3, .product-title {
+    @include handwritten-text;
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: $pencil-dark;
+  }
+  
+  p, .product-description {
+    @include handwritten-text;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: $pencil-medium;
+    margin-bottom: 10px;
+  }
+  
+  .product-price {
+    @include handwritten-text;
+    font-family: 'Caveat', cursive;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: $pencil-dark;
+    margin-top: 15px;
+  }
+  
+  .product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    filter: sepia(10%) contrast(1.1);
+  }
+  
+  button, .product-button {
+    @include handwritten-text;
+    font-family: 'Caveat', cursive;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background: $pencil-dark;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+    
+    &:hover {
+      background: $pencil-medium;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .home-container {
+    padding: 20px 10px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  p {
+    font-size: 1rem;
+    padding: 15px;
   }
   
   .pc, .laptop, .mobile, .console {
-    display: flex;            /* Use flexbox for card containers */
-    flex-wrap: wrap;         /* Allow wrapping of cards to the next line */
-    justify-content: space-around; /* Distribute space between cards */
-    margin-bottom: 15px;     /* Space between categories */
+    grid-template-columns: 1fr;
+    gap: 20px;
+    
+    h2 {
+      font-size: 2rem;
+      text-align: center;
+    }
   }
   
+  .product-card {
+    margin: 0 auto;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .pc, .laptop, .mobile, .console {
+    h2 {
+      font-size: 1.8rem;
+    }
+  }
+  
+  .product-card {
+    padding: 15px;
+    
+    h3, .product-title {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+// Add some subtle paper texture variations
+.home-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, transparent 50%, rgba(0,0,0,0.02) 51%),
+    radial-gradient(circle at 80% 20%, transparent 50%, rgba(0,0,0,0.02) 51%),
+    radial-gradient(circle at 40% 40%, transparent 50%, rgba(0,0,0,0.01) 51%);
+  background-size: 200px 200px, 300px 300px, 150px 150px;
+  z-index: -1;
+  pointer-events: none;
+}

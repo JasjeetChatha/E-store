@@ -1,110 +1,385 @@
-@use "sass:color";
+// Import Google Fonts for handwritten look (if not already imported globally)
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Caveat:wght@400;500;600;700&display=swap');
 
-// Color Palette
-$primary-color: #3D52A0;  // Deep Purple for primary text and dark background
-$secondary-color: #7091E6; // Soft Blue for secondary background elements
-$accent-color: #ffffff;    // Muted Light Blue for accents and highlights
-$button-color: #ADBBDA;    // Pale Grayish Blue for buttons
-$hover-color: #EDE8F5;     // Very Light Lavender for hover effects
-$shadow-color: rgba(0, 0, 0, 0.2); // Slightly darker shadow for better contrast
+// Variables for consistent theming
+$pencil-dark: #2c3e50;
+$pencil-medium: #34495e;
+$pencil-light: #7f8c8d;
+$shadow-color: rgba(0, 0, 0, 0.1);
+$sticky-yellow: #fff740;
+$sticky-pink: #ff7eb3;
+$sticky-blue: #7fdbff;
+$sticky-green: #2ecc71;
+$sticky-orange: #ff851b;
+$sticky-purple: #b19cd9;
 
-// Product Container Styles
+// Mixins
+@mixin handwritten-text {
+  font-family: 'Kalam', cursive;
+  color: $pencil-dark;
+  text-shadow: 
+    0.5px 0.5px 1px rgba(0, 0, 0, 0.8),
+    -0.3px -0.3px 0.5px rgba(0, 0, 0, 0.3),
+    0.8px 0.8px 2px rgba(0, 0, 0, 0.2);
+  filter: 
+    contrast(1.2) 
+    brightness(0.95) 
+    sepia(0.1);
+}
+
+@mixin floating-animation($delay: 0s, $duration: 3s) {
+  animation: float $duration ease-in-out infinite $delay;
+}
+
+// Keyframes
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(var(--rotation)); }
+  25% { transform: translateY(-3px) rotate(calc(var(--rotation) + 0.5deg)); }
+  50% { transform: translateY(-6px) rotate(var(--rotation)); }
+  75% { transform: translateY(-3px) rotate(calc(var(--rotation) - 0.5deg)); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes buttonPress {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(2px); }
+  100% { transform: translateY(0); }
+}
+
+// Product Container - Sticky Note Style
 .product-container {
-  width: 100%;
-  max-width: 18rem;
-  background-color: $secondary-color;
-  box-shadow: 0 8px 16px $shadow-color;
-  border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin-bottom: 20px;
-  overflow: hidden;
-
+  background: $sticky-yellow;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 
+    3px 3px 8px $shadow-color,
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  --rotation: -1deg;
+  transform: rotate(var(--rotation));
+  @include floating-animation(random(3) * 1s, 3s + random(2) * 1s);
+  animation-fill-mode: both;
+  
+  // Alternate colors and rotations for variety
+  &:nth-child(2n) {
+    background: $sticky-pink;
+    --rotation: 1deg;
+  }
+  
+  &:nth-child(3n) {
+    background: $sticky-blue;
+    --rotation: -0.5deg;
+  }
+  
+  &:nth-child(4n) {
+    background: $sticky-green;
+    --rotation: 1.5deg;
+  }
+  
+  &:nth-child(5n) {
+    background: $sticky-orange;
+    --rotation: -1.5deg;
+  }
+  
+  &:nth-child(6n) {
+    background: $sticky-purple;
+    --rotation: 0.8deg;
+  }
+  
+  // Tape effect at the top
+  &::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 45px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    box-shadow: 
+      inset 0 1px 2px rgba(0, 0, 0, 0.1),
+      0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  // Paper texture overlay
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 30% 20%, transparent 50%, rgba(0,0,0,0.02) 51%),
+      radial-gradient(circle at 70% 80%, transparent 50%, rgba(0,0,0,0.015) 51%);
+    background-size: 100px 100px, 80px 80px;
+    border-radius: 8px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  // Hover effects
   &:hover {
-    transform: scale(1.02);
-  }
-
-  .product-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 6px 12px $shadow-color;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-    &:hover {
-      transform: scale(1.05);
-      box-shadow: 0 12px 24px $shadow-color;
+    transform: rotate(0deg) scale(1.03);
+    box-shadow: 
+      5px 5px 20px rgba(0, 0, 0, 0.25),
+      0 0 0 1px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    z-index: 10;
+    
+    .product-image {
+      transform: scale(1.02);
     }
-  }
-
-  .product-info {
-    padding: 20px;
-    color: $primary-color;
-
-    .product-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: $primary-color;
-    }
-
-    .product-desc {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: color.adjust($accent-color, $lightness: 10%);
-    }
-  }
-
-  .product-details {
-    list-style: none;
-    padding: 0;
-    margin-top: 10px;
-
-    .product-detail {
-      font-size: 1rem;
-      color: $accent-color;
-
-      &:not(:last-child) {
-        margin-bottom: 8px;
-      }
-    }
-  }
-
-  .product-actions {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-
+    
     .btn {
-      padding: 8px 16px;
-      font-size: 1rem;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  // All child elements should be above the texture overlay
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// Product Image
+.product-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  filter: sepia(5%) contrast(1.05) brightness(1.02);
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+// Product Info Section
+.product-info {
+  margin-bottom: 15px;
+}
+
+.product-title {
+  @include handwritten-text;
+  font-family: 'Caveat', cursive;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: $pencil-dark;
+  line-height: 1.3;
+}
+
+.product-desc {
+  @include handwritten-text;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: $pencil-medium;
+  margin-bottom: 0;
+  
+  i {
+    font-style: normal;
+    opacity: 0.9;
+  }
+}
+
+// Product Details List
+.product-details {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+  
+  .product-detail {
+    @include handwritten-text;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    color: $pencil-medium;
+    position: relative;
+    padding-left: 8px;
+    
+    // Hand-drawn bullet points
+    &::before {
+      content: '•';
+      position: absolute;
+      left: -2px;
+      color: $pencil-dark;
+      font-weight: bold;
+      transform: rotate(random(10) - 5deg);
+    }
+    
+    b {
+      color: $pencil-dark;
       font-weight: 600;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-      outline: none;
-      border: none;
-
-      &:hover {
-        transform: scale(1.05);
-      }
-
-      &.btn-add-to-cart {
-        background-color: $button-color;
-        color: $primary-color;
-
-        &:hover {
-          background-color: $hover-color;
-        }
-      }
-
-      &.btn-buy-now {
-        background-color: #ff4c68;
-        color: $primary-color;
-
-        &:hover {
-          background-color: color.adjust(#ff4c68, $lightness: -10%);
-        }
-      }
     }
   }
 }
+
+// Product Actions Section
+.product-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  justify-content: space-between;
+}
+
+// Buttons - styled like price tags
+.btn {
+  @include handwritten-text;
+  font-family: 'Caveat', cursive;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  flex: 1;
+  text-align: center;
+  box-shadow: 
+    0 4px 10px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: rotate(-1deg);
+  animation: float 4s ease-in-out infinite;
+  
+  &:active {
+    transform: scale(0.95) rotate(-1deg);
+  }
+  
+  // Price tag string effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 15px;
+    width: 1.5px;
+    height: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    transform: rotate(15deg);
+  }
+  
+  // Button text above everything
+  & > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.btn-add-to-cart {
+  background: $pencil-dark;
+  color: white;
+  transform: rotate(1deg);
+  
+  &:hover {
+    background: $pencil-medium;
+    transform: translateY(-3px) rotate(0deg);
+    box-shadow: 
+      0 6px 15px rgba(44, 62, 80, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  
+  &:active {
+    background: darken($pencil-dark, 10%);
+    transform: scale(0.95) rotate(1deg);
+  }
+}
+
+.btn-buy-now {
+  background: #e74c3c;
+  color: white;
+  transform: rotate(-1.5deg);
+  
+  &:hover {
+    background: lighten(#e74c3c, 5%);
+    transform: translateY(-3px) rotate(0deg);
+    box-shadow: 
+      0 6px 15px rgba(231, 76, 60, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  
+  &:active {
+    background: darken(#e74c3c, 10%);
+    transform: scale(0.95) rotate(-1.5deg);
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .product-container {
+    padding: 15px;
+    margin: 0 auto;
+    max-width: 280px;
+  }
+  
+  .product-image {
+    height: 180px;
+  }
+  
+  .product-title {
+    font-size: 1.3rem;
+  }
+  
+  .product-desc {
+    font-size: 0.9rem;
+  }
+  
+  .product-detail {
+    font-size: 0.85rem;
+  }
+  
+  .btn {
+    font-size: 0.95rem;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-container {
+    padding: 12px;
+    max-width: 260px;
+  }
+  
+  .product-image {
+    height: 160px;
+  }
+  
+  .product-title {
+    font-size: 1.2rem;
+  }
+  
+  .product-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+}
+
+// Animation delays for staggered loading
+.product-container:nth-child(1) { animation-delay: 0.1s; }
+.product-container:nth-child(2) { animation-delay: 0.2s; }
+.product-container:nth-child(3) { animation-delay: 0.3s; }
+.product-container:nth-child(4) { animation-delay: 0.4s; }
+.product-container:nth-child(5) { animation-delay: 0.5s; }
+.product-container:nth-child(6) { animation-delay: 0.6s; }

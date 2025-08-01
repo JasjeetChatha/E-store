@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React, { Fragment, useContext } from "react";
 import ProductCard from "../Product/productCard";
 import "./Home-CSS/Home.scss";
 import products from "../../Data/Products.json";
@@ -50,7 +50,10 @@ function Home() {
         <div className="console">
           <h2>Consoles</h2>
           {products.filter((product)=>product.type==="console").map
-          ((product)=><ProductCard key={product.id} product={product} ></ProductCard>)}
+          ((product)=><ProductCard 
+          key={product.id} 
+          product={product} />
+          )}
         </div>
       </div>
     </Fragment>

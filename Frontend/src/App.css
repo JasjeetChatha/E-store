@@ -40,3 +40,19 @@
 .read-the-docs {
   color: #888;
 }
+/* App.css */
+body {
+  background-image: url('./Components/images/paperb.jpg')!important; /* Adjust the path if needed */
+  background-size: cover!important;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed!important; /* This is the magic line */
+  height: 100%;
+  margin: 0;
+  font-family: sans-serif;
+}
+.main-content {
+  padding-top: 70px; 
+}
+
+

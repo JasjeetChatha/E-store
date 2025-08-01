@@ -14,14 +14,8 @@ function SProductType() {
       {filteredProducts.map((product) => (
         <ProductCard
           key={product.id}
-          id={product.id}
-          type={product.type}
-          name={product.name}
-          price={product.price}
-          brand={product.brand}
-          rating={product.rating}
-          desc={product.desc}
-          imageUrl={product.imageUrl}
+         product={product}
+          
         />
       ))}
     </div>

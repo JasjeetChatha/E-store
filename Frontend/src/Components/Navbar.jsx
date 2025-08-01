@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CartContext } from "../Context/CartContext";
+import { Link } from "react-router-dom";  // Import Link from react-router-dom
+import "./Navbar.scss";
 
 function Navbar() {
+  const { cart } = useContext(CartContext);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="/">
+      <Link className="navbar-brand" to="/">
         E-store
-      </a>
+      </Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -20,36 +25,34 @@ function Navbar() {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link" href="/laptop">
+            <Link className="nav-link" to="/laptop">
               Laptops
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/pc">
+            <Link className="nav-link" to="/pc">
               Pc's
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/mobile">
+            <Link className="nav-link" to="/mobile">
               Mobiles
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/console">
+            <Link className="nav-link" to="/console">
               Consoles
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/cart">
-              Cart
-            </a>
-          </li>
-          <li className="nav-item">
-            
+            <Link className="nav-link" to="/cart">
+              Cart <span className="badge">{cart.length}</span>
+            </Link>
           </li>
         </ul>
       </div>
     </nav>
   );
 }
+
 export default Navbar;
