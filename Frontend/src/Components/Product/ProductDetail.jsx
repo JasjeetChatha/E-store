@@ -1,18 +1,38 @@
-import React,{useContext} from "react";
-import {useParams} from "react-router-dom";
-import products from "../../Data/Products.json";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { CartContext } from "../../Context/CartContext";
 import "./productDetail.scss";
+
 function ProductDetail() {
+  const { addToCart } = useContext(CartContext);
+  const { id } = useParams();
+  
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const {addToCart}=useContext(CartContext);
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/products/${id}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch product");
+        }
+        const data = await response.json();
+        setProduct(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProduct();
+  }, [id]);
 
-  const {id} = useParams();
-  const product = products.find((prod) => prod.id === parseInt(id));
-  if (!product) {
-    return <h2>Product not found!</h2>; // Handle case when product is not found
-  }
- console.log("Product loaded:", product);
+  if (loading) return <p>Loading product details...</p>;
+  if (error) return <p>Error: {error}</p>;
+  if (!product) return <h2>Product not found!</h2>;
 
   return (
     <div className="product-detail-container">
@@ -39,11 +59,14 @@ function ProductDetail() {
         </div>
 
         <div className="product-actions">
-          <button className="btn btn-add-to-cart"  onClick={() => addToCart(product)}>Add to Cart</button>
-          <button className="btn btn-buy-now" >Buy Now</button>
+          <button className="btn btn-add-to-cart" onClick={() => addToCart(product)}>
+            Add to Cart
+          </button>
+          <button className="btn btn-buy-now">Buy Now</button>
         </div>
       </div>
     </div>
   );
 }
+
 export default ProductDetail;
