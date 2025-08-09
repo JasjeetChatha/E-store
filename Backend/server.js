@@ -51,7 +51,8 @@ const productSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Product = mongoose.model("Product", productSchema);
+const Product = mongoose.models.Product || mongoose.model("Product", productSchema);
+
 
 // POST route for creating product with image
 app.post("/products", upload.single("image"), async (req, res) => {
