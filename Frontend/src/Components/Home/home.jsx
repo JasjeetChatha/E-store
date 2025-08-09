@@ -8,21 +8,25 @@ function Home() {
   const [error, setError] = useState(null);    
 
   useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/products`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch products");
-        }
-        const data = await response.json();
-        setProducts(data.data || []); 
-        setError(err.message);
-      } finally {
-        setLoading(false);
+  async function fetchProducts() {
+    setLoading(true);
+    try {
+      const response = await fetch("http://40.233.126.9:5000/products");
+      if (!response.ok) {
+        throw new Error("Failed to fetch products");
       }
+      const data = await response.json();
+      setProducts(data.data || []);
+      setError(null); // clear previous errors if successful
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
-    fetchProducts();
-  }, []);
+  }
+  fetchProducts();
+}, []);
+
 
   if (loading) return <p>Loading products...</p>;
   if (error) return <p>Error loading products: {error}</p>;

@@ -12,7 +12,7 @@ function SProductType() {
     async function fetchProductsByType() {
       try {
         setLoading(true);
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/products`);
+        const res = await fetch("http://40.233.126.9:5000/products");
         if (!res.ok) throw new Error("Failed to fetch products");
         const data = await res.json();
         // Filter products by type on the client side (or you can create backend filter API later)
