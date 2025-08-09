@@ -6,7 +6,7 @@ const productSchema = mongoose.Schema({
   brand: { type: String, required: true },
   rating: { type: String, required: true },
   desc: { type: String },
-  imageUrl: { type: String, required: true },  // this stores path like '/uploads/filename.jpg'
+  imageUrl: { type: String, required: false },  // this stores path like '/uploads/filename.jpg'
   type: { type: String, required: true },
 }, { timestamps: true });
 
