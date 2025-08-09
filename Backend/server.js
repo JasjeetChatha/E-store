@@ -5,13 +5,13 @@ import mongoose from "mongoose";
 import multer from "multer";
 import path from "path";
 import dotenv from "dotenv";
-
+import productRoutes from "./routes/product.route.js";
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-
+app.use("/products", productRoutes);
 // Serve static files from uploads folder
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
