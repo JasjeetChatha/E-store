@@ -1,4 +1,4 @@
-// server.js or your main backend entry file
+// server.js
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
@@ -35,38 +35,56 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({storage});
+const upload = multer({ storage });
 
-// Define product mongoose schema (simplified)
-const productSchema = new mongoose.Schema({
-  name: String,
-  price: Number,
-  type: String,
-  imageUrl: String, // This will store the image path like /uploads/12345.jpg
-});
+// Product schema
+const productSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    price: { type: Number, required: true },
+    brand: { type: String, required: true },
+    rating: { type: String, required: true },
+    desc: { type: String },
+    imageUrl: { type: String, required: true },
+    type: { type: String, required: true },
+  },
+  { timestamps: true }
+);
 
 const Product = mongoose.model("Product", productSchema);
 
 // POST route for creating product with image
 app.post("/products", upload.single("image"), async (req, res) => {
   try {
-    // req.file contains image info, req.body has text fields
-    if (!req.file)
-      return res.status(400).json({error: "Image file is required"});
+    if (
+      !req.body.name ||
+      !req.body.price ||
+      !req.body.brand ||
+      !req.body.rating ||
+      !req.body.type ||
+      !req.file
+    ) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Please provide all required fields" });
+    }
 
     const newProduct = new Product({
       name: req.body.name,
       price: req.body.price,
+      brand: req.body.brand,
+      rating: req.body.rating,
+      desc: req.body.desc || "",
       type: req.body.type,
       imageUrl: `/uploads/${req.file.filename}`,
     });
 
     await newProduct.save();
 
-    res.status(201).json({success: true, product: newProduct});
+    res.status(201).json({ success: true, product: newProduct });
   } catch (error) {
     console.error("Error creating product:", error);
-    res.status(500).json({success: false, error: "Server error"});
+    res.status(500).json({ success: false, error: "Server error" });
   }
 });
 
