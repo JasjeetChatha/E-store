@@ -6,8 +6,9 @@ const productSchema = mongoose.Schema({
   brand: { type: String, required: true },
   rating: { type: String, required: true },
   desc: { type: String },
-  imageUrl: { type: String, required: true },
+  imageUrl: { type: String, required: true },  // this stores path like '/uploads/filename.jpg'
   type: { type: String, required: true },
 }, { timestamps: true });
+
 
 export default mongoose.model("Product", productSchema);
