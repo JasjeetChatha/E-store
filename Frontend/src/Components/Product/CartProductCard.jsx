@@ -10,7 +10,7 @@ function CartProductCard({ product }) {
     <div className="product-container" style={{ width: "18rem" }}>
       <img 
         className="product-image" 
-        src={product.imageUrl} 
+        src={product.image} 
         alt={product.name} 
       />
       <div className="product-info">
