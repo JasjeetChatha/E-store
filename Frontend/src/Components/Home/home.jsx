@@ -11,7 +11,7 @@ function Home() {
   async function fetchProducts() {
     setLoading(true);
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/products/`);
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/products`);
 
       if (!response.ok) {
         throw new Error("Failed to fetch products");
