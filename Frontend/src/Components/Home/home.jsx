@@ -8,26 +8,42 @@ function Home() {
   const [error, setError] = useState(null);    
 
   useEffect(() => {
-  async function fetchProducts() {
-    setLoading(true);
-    try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/products`);
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch products");
+    async function fetchProducts() {
+      setLoading(true);
+      try {
+        // Debug logging
+        console.log('API URL:', process.env.REACT_APP_API_URL);
+        const fullUrl = `${process.env.REACT_APP_API_URL}/products/`;
+        console.log('Full URL:', fullUrl);
+        
+        const response = await fetch(fullUrl);
+        
+        console.log('Response status:', response.status);
+        console.log('Response OK:', response.ok);
+        
+        // Get raw response first to see what we're actually getting
+        const rawText = await response.text();
+        console.log('Raw response (first 200 chars):', rawText.substring(0, 200));
+        
+        if (!response.ok) {
+          throw new Error(`Failed to fetch products: ${response.status} - ${response.statusText}`);
+        }
+        
+        // Parse the JSON
+        const data = JSON.parse(rawText);
+        console.log('Parsed data:', data);
+        
+        setProducts(data.data || []);
+        setError(null); // clear previous errors if successful
+      } catch (err) {
+        console.error('Fetch error:', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
-      const data = await response.json();
-      setProducts(data.data || []);
-      setError(null); // clear previous errors if successful
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
     }
-  }
-  fetchProducts();
-}, []);
-
+    fetchProducts();
+  }, []);
 
   if (loading) return <p>Loading products...</p>;
   if (error) return <p>Error loading products: {error}</p>;
