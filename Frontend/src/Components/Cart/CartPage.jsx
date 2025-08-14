@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { CartContext } from "../../Context/CartContext";
 import CartProductCard from "../Product/CartProductCard"; // Adjust path as needed
-
+import "./CartPage.scss";
 const CartPage = () => {
   const { cart, getTotalItems, getTotalPrice } = useContext(CartContext);
   
@@ -20,7 +20,7 @@ const CartPage = () => {
             <p><strong>Total Price: ${getTotalPrice()}</strong></p>
           </div>
           
-          <div className="cart-items">
+          <div className="cart-items grid">
             {cart.map((item) => (
               <CartProductCard key={item.id} product={item} />
             ))}

@@ -1,0 +1,12 @@
+.product-grid .grid {
+  display: grid;
+  grid-template-columns: 1fr; /* mobile default */
+  gap: 60px; /* space between cards */
+}
+
+/* Laptop / Desktop */
+@media (min-width: 769px) {
+  .product-grid .grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+  }
+}

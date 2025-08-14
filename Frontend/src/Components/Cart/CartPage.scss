@@ -1,0 +1,12 @@
+.cart-items.grid {
+  display: grid;
+  grid-template-columns: 1fr; // mobile default
+  gap: 60px; // space between items
+}
+
+/* Laptop / Desktop */
+@media (min-width: 769px) {
+  .cart-items.grid {
+    grid-template-columns: repeat(3, 1fr); // 3 per row on laptop
+  }
+}

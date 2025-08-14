@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ProductCard from "./productCard";
-
+import "./SProductType.scss";
 function SProductType() {
   const { type } = useParams();
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -35,14 +35,15 @@ const API_URL = 'https://e-store-backend.duckdns.org';
     return <p>No products found for {type}</p>;
 
   return (
-    <div className="container">
-      <h2>{type.charAt(0).toUpperCase() + type.slice(1)}s</h2>
-      <br />
-      <br />
-      {filteredProducts.map((product) => (
-        <ProductCard key={product._id || product.id} product={product} />
-      ))}
-    </div>
+    <div className="container product-grid">
+  <h2>{type.charAt(0).toUpperCase() + type.slice(1)}s</h2>
+  <div className="grid">
+    {filteredProducts.map((product) => (
+      <ProductCard key={product._id || product.id} product={product} />
+    ))}
+  </div>
+</div>
+
   );
 }
 
