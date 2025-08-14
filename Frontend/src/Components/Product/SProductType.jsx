@@ -7,12 +7,12 @@ function SProductType() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+const API_URL = 'https://e-store-backend.duckdns.org';
   useEffect(() => {
     async function fetchProductsByType() {
       try {
         setLoading(true);
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/products`);
+        const res = await fetch(`${API_URL}/products`);
         if (!res.ok) throw new Error("Failed to fetch products");
         const data = await res.json();
         // Filter products by type on the client side (or you can create backend filter API later)

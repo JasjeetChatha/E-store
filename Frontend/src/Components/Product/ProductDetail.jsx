@@ -6,30 +6,35 @@ import "./productDetail.scss";
 function ProductDetail() {
   const { addToCart } = useContext(CartContext);
   const { id } = useParams();
-  
+
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const API_URL = process.env.REACT_APP_API_URL || "https://e-store-backend.duckdns.org";
+
   useEffect(() => {
+    if (!id) return; // prevent fetching when id is undefined
+
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/products/${id}`);
+        const response = await fetch(`${API_URL}/products/${id}`);
+        if (!response.ok) throw new Error("Failed to fetch product");
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch product");
-        }
-        const data = await response.json();
-        setProduct(data);
+        const json = await response.json();
+        // Backend returns { success: true, data: {...} }
+        const productData = json.data;
+        setProduct(productData);
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
+
     fetchProduct();
-  }, [id]);
+  }, [id, API_URL]);
 
   if (loading) return <p>Loading product details...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -39,7 +44,7 @@ function ProductDetail() {
     <div className="product-detail-container">
       <div className="product-image-section">
         <img
-          src={product.image}
+          src={product.image || "/placeholder.png"} // fallback image
           alt={product.name}
           className="product-image"
         />
@@ -60,7 +65,10 @@ function ProductDetail() {
         </div>
 
         <div className="product-actions">
-          <button className="btn btn-add-to-cart" onClick={() => addToCart(product)}>
+          <button
+            className="btn btn-add-to-cart"
+            onClick={() => addToCart(product)}
+          >
             Add to Cart
           </button>
           <button className="btn btn-buy-now">Buy Now</button>
