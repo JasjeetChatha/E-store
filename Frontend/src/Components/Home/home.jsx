@@ -11,9 +11,11 @@ function Home() {
     async function fetchProducts() {
       setLoading(true);
       try {
-        // Debug logging
-        console.log('API URL:', process.env.REACT_APP_API_URL);
-        const fullUrl = `${process.env.REACT_APP_API_URL}/products/`;
+        // Hardcoded API URL for testing
+        const API_URL = 'https://e-store-backend.duckdns.org';
+        const fullUrl = `${API_URL}/products/`;
+        
+        console.log('Using hardcoded API URL:', API_URL);
         console.log('Full URL:', fullUrl);
         
         const response = await fetch(fullUrl);
