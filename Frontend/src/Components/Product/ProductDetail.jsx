@@ -15,7 +15,8 @@ function ProductDetail() {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://40.233.126.9:5000/products/${id}");
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/products/${id}`);
+
         if (!response.ok) {
           throw new Error("Failed to fetch product");
         }
