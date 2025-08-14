@@ -1,41 +1,37 @@
+// server.js
 import express from "express";
-import multer from "multer";
+import cors from "cors";
+import dotenv from "dotenv";
 import path from "path";
-import fs from "fs";
-import {
-  getAllProducts,
-  getProductById,
-  createProduct,
-  updateProduct,
-  deleteProduct
-} from "./Controller/product.controller.js";
+import connectDB from "./config/db.js"; // default import
+import productRoutes from "./routes/product.route.js";
 
-// Configure multer for file upload
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const uploadPath = 'uploads/';
-    // Create uploads directory if it doesn't exist
-    if (!fs.existsSync(uploadPath)) {
-      fs.mkdirSync(uploadPath, { recursive: true });
-    }
-    cb(null, uploadPath);
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, uniqueSuffix + path.extname(file.originalname));
-  }
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// ===== MIDDLEWARE =====
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Serve uploaded files (optional)
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
+
+// ===== ROUTES =====
+app.use("/products", productRoutes);
+
+// ===== MONGODB CONNECTION =====
+connectDB(); // call the default exported function
+
+// ===== ERROR HANDLING =====
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ success: false, error: err.message });
 });
 
-const upload = multer({ 
-  storage: storage,
-  limits: {
-    fileSize: 5 * 1024 * 1024 // 5MB limit
-  },
-  fileFilter: (req, file, cb) => {
-    if (file.mimetype.startsWith('image/')) {
-      cb(null, true);
-    } else {
-      cb(new Error('Please upload only image files'), false);
-    }
-  }
+// ===== START SERVER =====
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });
