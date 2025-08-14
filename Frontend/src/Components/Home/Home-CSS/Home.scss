@@ -352,6 +352,22 @@ p {
 }
 
 // Responsive design
+/* Tablets / small laptops */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .pc, .laptop, .mobile, .console {
+    grid-template-columns: repeat(3, 1fr); /* 3 per row */
+    gap: 40px;
+  }
+}
+
+/* Desktops / larger screens */
+@media (min-width: 1024px) {
+  .pc, .laptop, .mobile, .console {
+    grid-template-columns: repeat(3, 1fr); /* 4 per row */
+    gap: 60px;
+  }
+}
+
 @media (max-width: 768px) {
   .home-container {
     padding: 20px 10px;

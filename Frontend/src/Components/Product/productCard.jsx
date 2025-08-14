@@ -10,7 +10,7 @@ const navigate = useNavigate();
        <div
       className="product-container"
       style={{ width: "18rem" }}
-      onClick={() => navigate(`/${product.type}/${product.id}`)}
+      onClick={() => navigate(`/${product.type}/${product._id}`)}
     >
         <img className="product-image" src={product.image} alt={product.name} />
         <div className="product-info">

@@ -755,13 +755,13 @@ $sticky-purple: #b19cd9;
   }
 }
 
-.btn-add-to-cart {
-  background: $pencil-dark;
+.btn-add {
+  background: $sticky-green;
   color: white;
   transform: rotate(1deg);
   
   &:hover {
-    background: $pencil-medium;
+    background: $sticky-green;
     transform: translateY(-3px) rotate(0deg);
     box-shadow: 
       0 6px 15px rgba(44, 62, 80, 0.3),
@@ -774,7 +774,7 @@ $sticky-purple: #b19cd9;
   }
 }
 
-.btn-buy-now {
+.btn-remove {
   background: #e74c3c;
   color: white;
   transform: rotate(-1.5deg);
@@ -822,7 +822,16 @@ $sticky-purple: #b19cd9;
     padding: 8px 12px;
   }
 }
-
+// Laptop / Desktop view
+@media (min-width: 769px) {
+  .product-actions .btn {
+    flex: 0;           // shrink to content size
+    min-width: 120px;  // optional: keep buttons readable
+    max-width: 120px;  // optional: prevent them from being too wide
+    padding: 8px 14px; // adjust padding for laptop view
+    font-size: 0.95rem;
+  }
+}
 @media (max-width: 480px) {
   .product-container {
     padding: 12px;

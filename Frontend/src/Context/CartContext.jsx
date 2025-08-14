@@ -10,12 +10,12 @@ export const CartProvider = ({ children }) => {
   const addToCart = (product) => {
     console.log("Added to cart:", product);
     setCart((prevCart) => {
-      const existingItem = prevCart.find(item => item.id === product.id);
+      const existingItem = prevCart.find(item => item._id === product._id);
       
       if (existingItem) {
         // If item exists, increase quantity
         return prevCart.map(item =>
-          item.id === product.id
+          item._id === product._id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
@@ -28,24 +28,24 @@ export const CartProvider = ({ children }) => {
 
   const removeFromCart = (productId) => {
     setCart((prevCart) => {
-      const existingItem = prevCart.find(item => item.id === productId);
+      const existingItem = prevCart.find(item => item._id === productId);
       
       if (existingItem && existingItem.quantity > 1) {
         // If quantity > 1, decrease quantity
         return prevCart.map(item =>
-          item.id === productId
+          item._id === productId
             ? { ...item, quantity: item.quantity - 1 }
             : item
         );
       } else {
         // If quantity is 1, remove item completely
-        return prevCart.filter(item => item.id !== productId);
+        return prevCart.filter(item => item._id !== productId);
       }
     });
   };
 
   const getItemQuantity = (productId) => {
-    const item = cart.find(item => item.id === productId);
+    const item = cart.find(item => item._id === productId);
     return item ? item.quantity : 0;
   };
 
@@ -54,7 +54,9 @@ export const CartProvider = ({ children }) => {
   };
 
   const getTotalPrice = () => {
-    return cart.reduce((total, item) => total + (parseFloat(item.price) * item.quantity), 0).toFixed(2);
+    return cart
+      .reduce((total, item) => total + (parseFloat(item.price) * item.quantity), 0)
+      .toFixed(2);
   };
 
   return (

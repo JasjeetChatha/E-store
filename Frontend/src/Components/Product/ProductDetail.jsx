@@ -11,7 +11,7 @@ function ProductDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const API_URL = process.env.REACT_APP_API_URL || "https://e-store-backend.duckdns.org";
+  const API_URL = "https://e-store-backend.duckdns.org";
 
   useEffect(() => {
     if (!id) return; // prevent fetching when id is undefined

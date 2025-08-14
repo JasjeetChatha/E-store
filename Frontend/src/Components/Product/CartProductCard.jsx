@@ -4,13 +4,15 @@ import { CartContext } from "../../Context/CartContext";
 
 function CartProductCard({ product }) {
   const { addToCart, removeFromCart, getItemQuantity } = useContext(CartContext);
-  const quantity = getItemQuantity(product.id);
+
+  // Use _id instead of id
+  const quantity = getItemQuantity(product._id);
 
   return (
     <div className="product-container" style={{ width: "18rem" }}>
       <img 
         className="product-image" 
-        src={product.image} 
+        src={product.image || null} 
         alt={product.name} 
       />
       <div className="product-info">
@@ -41,11 +43,11 @@ function CartProductCard({ product }) {
         <button
           type="button"
           className="btn btn-quantity btn-remove"
-          onClick={() => removeFromCart(product.id)}
+          onClick={() => removeFromCart(product._id)}
         >
           -
-        </button>
-        <span className="quantity-display">{quantity}</span>
+        </button><br/>
+        <span className="quantity-display">{quantity}</span><br/>
         <button
           type="button"
           className="btn btn-quantity btn-add"
