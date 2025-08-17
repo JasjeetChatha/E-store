@@ -15,8 +15,6 @@ function Home() {
         const API_URL = 'https://e-store-backend.duckdns.org';
         const fullUrl = `${API_URL}/products/`;
         
-        console.log('Using hardcoded API URL:', API_URL);
-        console.log('Full URL:', fullUrl);
         
         const response = await fetch(fullUrl);
         
@@ -33,7 +31,7 @@ function Home() {
         
         // Parse the JSON
         const data = JSON.parse(rawText);
-        console.log('Parsed data:', data);
+        
         
         setProducts(data.data || []);
         setError(null); // clear previous errors if successful
