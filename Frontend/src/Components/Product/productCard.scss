@@ -286,7 +286,7 @@ $sticky-purple: #b19cd9;
 
 .btn-add-to-cart {
   background: $pencil-dark;
-  color: white;
+  color: white!important;
   transform: rotate(1deg);
   
   &:hover {
@@ -305,7 +305,7 @@ $sticky-purple: #b19cd9;
 
 .btn-buy-now {
   background: #e74c3c;
-  color: white;
+  color: white!important;
   transform: rotate(-1.5deg);
   
   &:hover {
