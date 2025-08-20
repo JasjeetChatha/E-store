@@ -1,0 +1,453 @@
+// Import Google Fonts for handwritten look (if not already imported globally)
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Caveat:wght@400;500;600;700&display=swap');
+
+// Variables for consistent theming (same as your product cards)
+$pencil-dark: #2c3e50;
+$pencil-medium: #34495e;
+$pencil-light: #7f8c8d;
+$shadow-color: rgba(0, 0, 0, 0.1);
+$sticky-yellow: #fff740;
+$sticky-pink: #ff7eb3;
+$sticky-blue: #7fdbff;
+$sticky-green: #2ecc71;
+$sticky-orange: #ff851b;
+$sticky-purple: #b19cd9;
+
+// Mixins (same as your product cards)
+@mixin handwritten-text {
+  font-family: 'Kalam', cursive;
+  color: $pencil-dark;
+  text-shadow: 
+    0.5px 0.5px 1px rgba(0, 0, 0, 0.8),
+    -0.3px -0.3px 0.5px rgba(0, 0, 0, 0.3),
+    0.8px 0.8px 2px rgba(0, 0, 0, 0.2);
+  filter: 
+    contrast(1.2) 
+    brightness(0.95) 
+    sepia(0.1);
+}
+
+@mixin floating-animation($delay: 0s, $duration: 3s) {
+  animation: float $duration ease-in-out infinite $delay;
+}
+
+// Keyframes (same as your product cards)
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(var(--rotation)); }
+  25% { transform: translateY(-3px) rotate(calc(var(--rotation) + 0.5deg)); }
+  50% { transform: translateY(-6px) rotate(var(--rotation)); }
+  75% { transform: translateY(-3px) rotate(calc(var(--rotation) - 0.5deg)); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes buttonPress {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(2px); }
+  100% { transform: translateY(0); }
+}
+
+// Form Container - Sticky Note Style (matching your product cards)
+.product-form, .user-form {
+  background: $sticky-yellow;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 
+    3px 3px 8px $shadow-color,
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  position: relative;
+  cursor: default;
+  transition: all 0.3s ease;
+  --rotation: -1deg;
+  transform: rotate(var(--rotation));
+  @include floating-animation(0s, 4s);
+  animation-fill-mode: both;
+  max-width: 500px;
+  margin: 40px auto;
+  
+  // Alternate form gets different color and rotation
+  &.user-form {
+    background: $sticky-pink;
+    --rotation: 1deg;
+  }
+  
+  // Tape effect at the top (same as product cards)
+  &::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    box-shadow: 
+      inset 0 1px 2px rgba(0, 0, 0, 0.1),
+      0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  // Paper texture overlay (same as product cards)
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 30% 20%, transparent 50%, rgba(0,0,0,0.02) 51%),
+      radial-gradient(circle at 70% 80%, transparent 50%, rgba(0,0,0,0.015) 51%);
+    background-size: 100px 100px, 80px 80px;
+    border-radius: 8px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  // Hover effects
+  &:hover {
+    transform: rotate(0deg) scale(1.01);
+    box-shadow: 
+      5px 5px 20px rgba(0, 0, 0, 0.25),
+      0 0 0 1px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    z-index: 10;
+  }
+  
+  // All child elements should be above the texture overlay
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// Form Title - handwritten style
+.product-form__title, .user-form__title {
+  @include handwritten-text;
+  font-family: 'Caveat', cursive;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  text-align: center;
+  color: $pencil-dark;
+  line-height: 1.2;
+  position: relative;
+  
+  // Underline effect like hand-drawn
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 2px;
+    background: $pencil-dark;
+    border-radius: 2px;
+    opacity: 0.7;
+  }
+}
+
+// Form container
+.product-form__form, .user-form__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+// Form fields
+.product-form__field, .user-form__field {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+// Labels - handwritten style
+.product-form__label, .user-form__label {
+  @include handwritten-text;
+  font-family: 'Caveat', cursive;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: $pencil-dark;
+  transform: rotate(-0.5deg);
+  transform-origin: left bottom;
+  
+  // Required asterisk
+  &::after {
+    content: '*';
+    color: #e74c3c;
+    margin-left: 4px;
+    font-weight: bold;
+    transform: rotate(5deg);
+    display: inline-block;
+  }
+}
+
+// Input fields - handwritten paper style
+.product-form__input, .user-form__input {
+  @include handwritten-text;
+  padding: 12px 15px;
+  border: none;
+  border-bottom: 2px solid $pencil-medium;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 4px 4px 0 0;
+  font-size: 1rem;
+  color: $pencil-dark;
+  transition: all 0.3s ease;
+  position: relative;
+  
+  // Paper lines effect
+  background-image: 
+    linear-gradient(to right, transparent 0px, transparent 20px, rgba(231, 76, 60, 0.2) 20px, rgba(231, 76, 60, 0.2) 21px, transparent 21px),
+    repeating-linear-gradient(
+      transparent,
+      transparent 24px,
+      rgba(44, 62, 80, 0.1) 24px,
+      rgba(44, 62, 80, 0.1) 25px
+    );
+  
+  &:focus {
+    outline: none;
+    border-bottom-color: $pencil-dark;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+  }
+  
+  &::placeholder {
+    @include handwritten-text;
+    color: $pencil-light;
+    font-style: italic;
+    opacity: 0.7;
+  }
+}
+
+// Textarea - notebook paper style
+.product-form__textarea, .user-form__textarea {
+  @include handwritten-text;
+  padding: 12px 15px;
+  border: none;
+  border: 2px solid $pencil-light;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 4px;
+  font-size: 1rem;
+  color: $pencil-dark;
+  resize: vertical;
+  min-height: 100px;
+  transition: all 0.3s ease;
+  line-height: 1.6;
+  
+  // Notebook lines
+  background-image: 
+    linear-gradient(to right, transparent 0px, transparent 20px, rgba(231, 76, 60, 0.3) 20px, rgba(231, 76, 60, 0.3) 22px, transparent 22px),
+    repeating-linear-gradient(
+      transparent,
+      transparent 25px,
+      rgba(44, 62, 80, 0.15) 25px,
+      rgba(44, 62, 80, 0.15) 26px
+    );
+  
+  &:focus {
+    outline: none;
+    border-color: $pencil-dark;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+  }
+  
+  &::placeholder {
+    @include handwritten-text;
+    color: $pencil-light;
+    font-style: italic;
+    opacity: 0.7;
+  }
+}
+
+// File input - special styling
+.product-form__input--file, .user-form__input--file {
+  @include handwritten-text;
+  padding: 15px;
+  border: 2px dashed $pencil-medium;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: $pencil-medium;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  position: relative;
+  
+  &:hover {
+    border-color: $pencil-dark;
+    background: rgba(255, 255, 255, 0.7);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  // File icon effect
+  &::before {
+    content: '📎';
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+  }
+}
+
+// Submit buttons - price tag style (matching your product cards)
+.product-form__submit, .user-form__submit {
+  @include handwritten-text;
+  font-family: 'Caveat', cursive;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  margin-top: 20px;
+  background: $pencil-dark;
+  color: white;
+  box-shadow: 
+    0 4px 10px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: rotate(-1deg);
+  
+  // Price tag string effect (same as product cards)
+  &::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 25px;
+    width: 1.5px;
+    height: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    transform: rotate(15deg);
+  }
+  
+  &:hover {
+    background: $pencil-medium;
+    transform: translateY(-3px) rotate(0deg);
+    box-shadow: 
+      0 6px 15px rgba(44, 62, 80, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  
+  &:active {
+    background: darken($pencil-dark, 10%);
+    transform: scale(0.95) rotate(-1deg);
+    animation: buttonPress 0.2s ease;
+  }
+}
+
+// Select dropdown - handwritten style
+.product-form__select, .user-form__select {
+  @include handwritten-text;
+  padding: 12px 15px;
+  border: none;
+  border-bottom: 2px solid $pencil-medium;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 4px 4px 0 0;
+  font-size: 1rem;
+  color: $pencil-dark;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  appearance: none;
+  
+  // Custom dropdown arrow
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%232c3e50' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 12px;
+  
+  // Paper lines effect
+  background-image: 
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%232c3e50' d='M6 8L0 0h12z'/%3E%3C/svg%3E"),
+    linear-gradient(to right, transparent 0px, transparent 20px, rgba(231, 76, 60, 0.2) 20px, rgba(231, 76, 60, 0.2) 21px, transparent 21px),
+    repeating-linear-gradient(
+      transparent,
+      transparent 24px,
+      rgba(44, 62, 80, 0.1) 24px,
+      rgba(44, 62, 80, 0.1) 25px
+    );
+  background-position: right 15px center, left top, left top;
+  background-size: 12px, 100%, 100%;
+  
+  &:focus {
+    outline: none;
+    border-bottom-color: $pencil-dark;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+  }
+}
+
+// Error and success states
+.product-form__input.error, .user-form__input.error,
+.product-form__textarea.error, .user-form__textarea.error,
+.product-form__select.error, .user-form__select.error {
+  border-bottom-color: #e74c3c;
+  background-color: rgba(231, 76, 60, 0.05);
+}
+
+.product-form__input.success, .user-form__input.success,
+.product-form__textarea.success, .user-form__textarea.success,
+.product-form__select.success, .user-form__select.success {
+  border-bottom-color: #2ecc71;
+  background-color: rgba(46, 204, 113, 0.05);
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .product-form, .user-form {
+    padding: 20px;
+    margin: 20px 15px;
+    max-width: none;
+  }
+  
+  .product-form__title, .user-form__title {
+    font-size: 1.8rem;
+  }
+  
+  .product-form__label, .user-form__label {
+    font-size: 1rem;
+  }
+  
+  .product-form__input, .user-form__input,
+  .product-form__textarea, .user-form__textarea,
+  .product-form__select, .user-form__select {
+    font-size: 0.95rem;
+    padding: 10px 12px;
+  }
+  
+  .product-form__submit, .user-form__submit {
+    font-size: 1.1rem;
+    padding: 12px 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-form, .user-form {
+    padding: 15px;
+    margin: 15px 10px;
+  }
+  
+  .product-form__title, .user-form__title {
+    font-size: 1.6rem;
+  }
+  
+  .product-form__field, .user-form__field {
+    gap: 15px;
+  }
+}

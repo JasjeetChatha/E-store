@@ -7,7 +7,9 @@ import {
   updateProduct,
   deleteProduct
 } from "../Controller/product.controller.js";
-
+import {getAllUsers,getUserById,
+  addNewUser,deleteUser
+} from "../Controller/user.controller.js"
 // Configure multer for file upload (memory storage for base64)
 const storage = multer.memoryStorage();
 

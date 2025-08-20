@@ -5,14 +5,19 @@ import dotenv from "dotenv";
 import path from "path";
 import connectDB from "./config/db.js"; // default import
 import productRoutes from "./routes/product.route.js";
-
+import userRoutes from "./routes/user.route.js";
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // ===== MIDDLEWARE =====
-app.use(cors());
+app.use(cors({
+  origin: "https://e-store-dun-tau.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -21,7 +26,7 @@ app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 // ===== ROUTES =====
 app.use("/products", productRoutes);
-
+app.use("/users", userRoutes);
 // ===== MONGODB CONNECTION =====
 connectDB(); // call the default exported function
 
